@@ -4,8 +4,8 @@ package com.makanstudios.name.ui.misc;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.kaciula.utils.ui.DialogUtils;
 
 /**
@@ -13,7 +13,7 @@ import com.kaciula.utils.ui.DialogUtils;
  * 
  * @author ka
  */
-public class BasicFragment extends SherlockFragment {
+public class BasicFragment extends Fragment {
 
     /**
      * The activity that hosts the fragment deals with all dialog interactions

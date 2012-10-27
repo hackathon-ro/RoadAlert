@@ -4,9 +4,9 @@ package com.makanstudios.name.ui.misc;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.kaciula.utils.ui.DialogUtils;
 
 /**
@@ -14,7 +14,7 @@ import com.kaciula.utils.ui.DialogUtils;
  * 
  * @author ka
  */
-public class BasicListFragment extends SherlockListFragment {
+public class BasicListFragment extends ListFragment {
 
     /**
      * The activity that hosts the fragment deals with all dialog interactions
@@ -27,13 +27,13 @@ public class BasicListFragment extends SherlockListFragment {
      * We keep a reference to the hosting activity for ease of use in cases
      * where activities can inherit from different classes
      */
-    protected SherlockFragmentActivity mActivity;
+    protected FragmentActivity mActivity;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mActivity = (SherlockFragmentActivity) activity;
+            mActivity = (FragmentActivity) activity;
             dialogListener = (DialogUtils.BasicDialogInterface) activity;
         } catch (ClassCastException e) {
             throw e;

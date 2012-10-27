@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.kaciula.utils.ui.DialogFragments;
 import com.kaciula.utils.ui.DialogUtils;
 
-public abstract class BasicActivity extends SherlockFragmentActivity implements
+public abstract class BasicActivity extends FragmentActivity implements
         DialogUtils.BasicDialogInterface {
 
     private boolean wasCreated;
