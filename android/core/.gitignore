@@ -1,0 +1,13 @@
+bin
+gen
+build
+local.properties
+obj
+target
+tmp
+reports
+armeabi*
+x86
+dump.txt
+seeds.txt
+usage.txt
