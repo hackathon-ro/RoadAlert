@@ -1,7 +1,7 @@
 
 package com.kaciula.utils.misc;
 
-import com.makanstudios.name.BuildConfig;
+import com.makanstudios.roadalert.BuildConfig;
 
 public class Config {
 

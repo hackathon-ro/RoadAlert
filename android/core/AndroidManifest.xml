@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.makanstudios.name"
+    package="com.makanstudios.roadalert"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0" >
@@ -24,10 +24,10 @@
            where PACKAGE is the application's package name.
     -->
     <permission
-        android:name="com.makanstudios.name.permission.C2D_MESSAGE"
+        android:name="com.makanstudios.roadalert.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.makanstudios.name.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.makanstudios.roadalert.permission.C2D_MESSAGE" />
 
     <supports-screens
         android:largeScreens="true"
@@ -40,12 +40,12 @@
         android:targetSdkVersion="16" />
 
     <application
-        android:name=".ui.misc.NameApplication"
+        android:name=".ui.misc.RoadAlertApplication"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/ic_launcher"
-        android:theme="@style/Theme.Name" >
+        android:theme="@style/Theme.RoadAlert" >
         <activity
             android:name=".ui.activity.MainActivity"
             android:icon="@drawable/ic_launcher"
@@ -65,7 +65,7 @@
           so only GCM services can send data messages for the app.
         -->
         <receiver
-            android:name=".gcm.GCMRedirectedBroadcastReceiver"
+            android:name="com.makanstudios.roadalert.gcm.GCMRedirectedBroadcastReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
@@ -75,14 +75,14 @@
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="com.makanstudios.name" />
+                <category android:name="com.makanstudios.roadalert" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".gcm.OnNewGcmNotificationReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="com.makanstudios.name.intent.GCM_NEW_NOTIFICATION" />
+                <action android:name="com.makanstudios.roadalert.intent.GCM_NEW_NOTIFICATION" />
             </intent-filter>
         </receiver>
 
@@ -95,8 +95,8 @@
             android:exported="false" />
 
         <provider
-            android:name=".provider.NameProvider"
-            android:authorities="com.makanstudios.name.provider"
+            android:name=".provider.RoadAlertProvider"
+            android:authorities="com.makanstudios.roadalert.provider"
             android:exported="false" />
     </application>
 

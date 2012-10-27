@@ -8,7 +8,7 @@ import org.apache.http.message.AbstractHttpMessage;
 
 import android.os.Debug;
 
-import com.makanstudios.name.BuildConfig;
+import com.makanstudios.roadalert.BuildConfig;
 
 /**
  * Common utilities when trying to debug memory issues

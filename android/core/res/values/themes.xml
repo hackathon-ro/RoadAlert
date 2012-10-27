@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.Name" parent="@android:style/Theme">
+    <style name="Theme.RoadAlert" parent="@android:style/Theme">
 
         <!-- FIXME: Generate abs theme with ab-style generator -->
 

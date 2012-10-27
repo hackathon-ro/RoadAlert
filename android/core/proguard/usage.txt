@@ -629,6 +629,8 @@ com.google.android.gcm.GCMRegistrar:
     private static final java.lang.String PROPERTY_ON_SERVER
     private static final java.lang.String PROPERTY_ON_SERVER_EXPIRATION_TIME
     private static final java.lang.String PROPERTY_ON_SERVER_LIFESPAN
+    129:173:public static void checkManifest(android.content.Context)
+    177:200:private static void checkReceiver(android.content.Context,java.util.Set,java.lang.String)
     442:446:public static void setRegisterOnServerLifespan(android.content.Context,long)
     505:506:private GCMRegistrar()
 com.google.android.gms.analytics.internal.Command:
@@ -643,93 +645,193 @@ com.google.android.gms.analytics.internal.IAnalyticsService$Stub:
     37:37:public android.os.IBinder asBinder()
 com.google.android.gms.analytics.internal.IAnalyticsService$Stub$Proxy:
     87:87:public java.lang.String getInterfaceDescriptor()
-com.kaciula.utils.Config
-com.kaciula.utils.DateUtils
-com.kaciula.utils.DebugUtils
-com.kaciula.utils.IntentUtils
-com.kaciula.utils.LogUtils:
-    33:34:public static void w(java.lang.String,java.lang.String)
-    43:43:public static void printStackTrace(java.lang.Throwable)
-    48:48:public static void throwRuntimeException(java.lang.String,java.lang.Throwable)
-com.kaciula.utils.Manifest
-com.kaciula.utils.Manifest$permission
-com.kaciula.utils.MiscConstants
-com.kaciula.utils.MiscUtils
-com.kaciula.utils.NetUtils
-com.kaciula.utils.NetUtils$1
-com.kaciula.utils.NetUtils$2
-com.kaciula.utils.NetUtils$BasicHttpClient
-com.kaciula.utils.NetUtils$InflatingEntity
-com.kaciula.utils.R
-com.kaciula.utils.R$attr
-com.kaciula.utils.R$bool
-com.kaciula.utils.R$color
-com.kaciula.utils.R$dimen
-com.kaciula.utils.R$drawable
-com.kaciula.utils.R$id
-com.kaciula.utils.R$integer
-com.kaciula.utils.R$layout
-com.kaciula.utils.R$string
-com.kaciula.utils.R$style
-com.kaciula.utils.R$styleable
-com.kaciula.utils.SelectionBuilder
-com.kaciula.utils.SimpleCrypto
-com.kaciula.utils.StorageHelper
-com.kaciula.utils.StorageHelper$1
-com.kaciula.utils.StreamUtils
-com.kaciula.utils.UiUtils
-com.kaciula.utils.UiUtils$1
-com.kaciula.utils.UiUtils$2
-com.kaciula.utils.UiUtils$InternalUrlSpan
-com.kaciula.utils.components.GingerbreadSharedPreferenceSaver
 com.kaciula.utils.components.IStrictMode
-com.kaciula.utils.components.LegacySharedPreferenceSaver
-com.kaciula.utils.components.LegacySharedPreferenceSaver$1
 com.kaciula.utils.components.LegacyStrictMode
-com.kaciula.utils.components.PlatformSpecificFactory
-com.kaciula.utils.components.SharedPreferenceSaver
-com.kaciula.utils.image.BitmapManager
-com.kaciula.utils.image.BitmapManager$1
-com.kaciula.utils.image.BitmapManager$MyInnerHandler
-com.kaciula.utils.image.BitmapUtils
-com.kaciula.utils.image.ImageCache
-com.kaciula.utils.image.ImageCache$1
-com.kaciula.utils.image.ImageCache$ImageCacheParams
-com.kaciula.utils.image.ImageResizer
-com.kaciula.utils.image.ImageWorker
-com.kaciula.utils.image.ImageWorker$AsyncDrawable
-com.kaciula.utils.image.ImageWorker$BitmapWorkerTask
-com.kaciula.utils.image.ImageWorker$ImageWorkerAdapter
-com.kaciula.utils.net.BasicNetService
-com.kaciula.utils.net.BasicUpdateService
-com.kaciula.utils.net.BasicUpdateService$Prefs
-com.kaciula.utils.net.GingerbreadWebService
-com.kaciula.utils.net.IWebService
-com.kaciula.utils.net.LegacyWebService
-com.kaciula.utils.net.MultipartParam
-com.kaciula.utils.net.MultipartParam$ParamType
-com.kaciula.utils.net.ServiceConstants
-com.kaciula.utils.net.ServiceException
-com.kaciula.utils.ui.BasicFragment
-com.kaciula.utils.ui.BasicListFragment
-com.kaciula.utils.ui.BasicLoader
-com.kaciula.utils.ui.BasicLoaderResponse
-com.kaciula.utils.ui.BasicRefreshFragment
-com.kaciula.utils.ui.BasicRefreshFragment$OnFragmentListener
-com.kaciula.utils.ui.BasicTask
-com.kaciula.utils.ui.BasicTaskListener
-com.kaciula.utils.ui.BasicTaskResponse
-com.kaciula.utils.ui.DetachableResultReceiver:
+com.kaciula.utils.components.PlatformSpecificFactory:
+    15:15:public PlatformSpecificFactory()
+    21:24:public static com.kaciula.utils.components.IStrictMode getStrictMode()
+    41:41:public static com.kaciula.utils.net.IWebService getWebService()
+com.kaciula.utils.misc.Config
+com.kaciula.utils.misc.DateUtils
+com.kaciula.utils.misc.DebugUtils:
     private static final java.lang.String TAG
-    38:39:public DetachableResultReceiver(android.os.Handler)
-    42:43:public void clearReceiver()
-    46:47:public void setReceiver(com.kaciula.utils.ui.DetachableResultReceiver$Receiver)
-com.kaciula.utils.ui.DialogFragments
-com.kaciula.utils.ui.DialogFragments$1
-com.kaciula.utils.ui.DialogFragments$2
-com.kaciula.utils.ui.DialogFragments$3
-com.kaciula.utils.ui.DialogFragments$4
-com.kaciula.utils.ui.DialogFragments$5
+    18:18:public DebugUtils()
+    50:50:public static void logHeap(java.lang.String)
+com.kaciula.utils.misc.IntentUtils
+com.kaciula.utils.misc.LogUtils:
+    private static final int MAX_LOG_TAG_LENGTH
+    56:57:public static void w(java.lang.String,java.lang.String)
+    71:71:public static void throwRuntimeException(java.lang.String,java.lang.Throwable)
+com.kaciula.utils.misc.MiscConstants:
+    public static final java.lang.String ENCODING_UTF8
+    public static final java.lang.String ENCODING_UTF16
+    public static final java.lang.String ENCODING_US_ASCII
+    public static final java.lang.String ENCODING_GZIP
+    public static final java.lang.String CONTENT_SCHEME_TEL
+    public static final java.lang.String CONTENT_SCHEME_SMS
+    public static final java.lang.String EXTRA_SMS_BODY
+    public static final java.lang.String CONTENT_SCHEME_MAILTO
+    public static final java.lang.String CONTENT_SCHEME_RESOURCE
+    public static final java.lang.String MIME_TYPE_EMAIL
+    public static final java.lang.String MIME_TYPE_TEXT
+    public static final java.lang.String MIME_TYPE_PLAIN
+    public static final java.lang.String MIME_TYPE_HTML
+    public static final java.lang.String MIME_TYPE_IMAGE
+    public static final java.lang.String MIME_TYPE_PNG
+    public static final java.lang.String MIME_TYPE_JPG
+    public static final java.lang.String MIME_TYPE_APPLICATION
+    public static final java.lang.String NET_SCHEME_GOOGLE_MAPS
+    public static final java.lang.String NET_SCHEME_HTTP
+    public static final java.lang.String NET_SCHEME_HTTPS
+    public static final java.lang.String NET_HEADER_ACCEPT_ENCODING
+    public static final java.lang.String NET_HEADER_AUTHORIZATION
+    public static final java.lang.String NET_HEADER_USER_AGENT
+    public static final java.lang.String NET_HEADER_HOST
+    public static final java.lang.String NET_HEADER_CONNECTION
+    public static final java.lang.String NET_HEADER_CONNECTION_KEEP_ALIVE
+    public static final java.lang.String NET_HEADER_CONTENT_TYPE
+    public static final java.lang.String NET_HEADER_CONTENT_LENGTH
+    public static final java.lang.String NET_HEADER_CONTENT_TYPE_JSON
+    public static final java.lang.String NET_HEADER_CONTENT_TYPE_WWW
+    public static final java.lang.String NET_HEADER_CONTENT_TYPE_BINARY
+    public static final java.lang.String NET_HEADER_CONTENT_TYPE_MULTIPART
+    public static final java.lang.String NET_TYPE_APPLICATION_JSON
+    public static final java.lang.String REGEX_EMAIL
+    public static final java.lang.String REGEX_ALL_DIGITS
+    public static final java.lang.String REGEX_ALL_DIGITS_WITH_DOT
+    public static final java.lang.String REGEX_AT_LEAST_ONE_NUMBER
+    public static final java.lang.String REGEX_NOT_PRINTABLE_ASCII
+    public static final java.lang.String DECIMAL_FORMAT_2_DIGITS
+    public static final java.lang.String ACCOUNT_TYPE_GOOGLE
+    public static final int DISPLAY_HEIGHT_PHONE_SMALL
+    public static final int DISPLAY_HEIGHT_PHONE_NORMAL
+    public static final int DISPLAY_HEIGHT_PHONE_LARGE
+com.kaciula.utils.misc.MiscUtils:
+    private static java.lang.String uniqueDeviceId
+    private static final java.lang.String DEFAULT_DEVICE_ID
+    65:71:public static java.lang.String generateRandomId(int)
+    75:78:public static java.lang.String getUniqueDeviceId()
+    82:82:private static java.lang.String createUniqueDeviceId()
+    93:134:private static java.lang.String createUniqueDeviceId(int)
+    145:150:public static java.lang.String getApplicationVersion()
+    166:181:public static java.lang.String getDeviceInfo()
+    191:194:public static boolean isValid(java.lang.String)
+    204:207:public static java.lang.String getSanitized(java.lang.String)
+    217:229:public static java.lang.String getSanitizedLink(java.lang.String)
+    239:243:public static void showOrVanish(android.widget.TextView,java.lang.String)
+    253:256:public static java.lang.String ellipsize(java.lang.String,int)
+    266:278:public static java.lang.String parseExtraHtml(java.lang.String)
+    288:288:public static boolean isPortrait()
+    298:298:public static boolean isLandscape()
+    309:319:public static void sendSmsDirectly(java.lang.String,java.lang.String)
+    329:364:public static java.lang.String getGalleryImagePath(android.net.Uri)
+    369:369:public static boolean isPicasaContentUri(android.net.Uri)
+    377:394:public static int getGalleryImageOrientation(android.net.Uri)
+    404:404:public static int getMemoryClass()
+    434:442:public static int getPhotoOrientation(java.lang.String)
+    447:466:public static int getPhotoRotateAngle(java.lang.String)
+    470:515:public static void fixPhotoOrientation(java.lang.String,int)
+    523:543:public static void sendLogs(android.content.Context,java.lang.String,int)
+    546:547:public static boolean hasPermission(java.lang.String)
+com.kaciula.utils.misc.NetUtils:
+    private static org.apache.http.client.HttpClient trustfulHttpsClient
+    public static final int SECOND_IN_MILLIS
+    public static final int CONNECTION_TIMEOUT
+    private static final int SOCKET_TIMEOUT
+    private static final int SOCKET_BUFFER_SIZE
+    private static final int MAX_CONNECTIONS
+    72:72:public NetUtils()
+    116:119:public static org.apache.http.client.HttpClient getTrustfulHttpsClient()
+    128:145:public static org.apache.http.client.HttpClient createTrustfulHttpsClient()
+    254:257:public static boolean isInternetAvailable()
+    267:280:public static java.lang.String getStringResponse(java.lang.String)
+    291:325:public static byte[] getImageData(java.lang.String)
+com.kaciula.utils.misc.SimpleCrypto
+com.kaciula.utils.misc.StorageHelper
+com.kaciula.utils.misc.StorageHelper$1
+com.kaciula.utils.misc.StreamUtils:
+    private static final java.lang.String TAG
+    23:23:public StreamUtils()
+    38:40:public static java.lang.String loadStringFromAsset(java.lang.String,java.lang.String)
+    56:70:public static boolean saveFile(java.io.File,java.io.InputStream)
+    84:91:public static android.graphics.Bitmap decodeStream(java.io.InputStream,int,int)
+    104:126:public static android.graphics.Bitmap decodeByteArray(byte[],int,int)
+    138:190:public static android.graphics.Bitmap decodeFile(java.io.File,int,int)
+com.kaciula.utils.misc.UiUtils
+com.kaciula.utils.misc.UiUtils$1
+com.kaciula.utils.misc.UiUtils$2
+com.kaciula.utils.misc.UiUtils$InternalUrlSpan
+com.kaciula.utils.net.ApiService
+com.kaciula.utils.net.GingerbreadWebService:
+    50:50:public java.lang.String get(java.lang.String)
+    57:110:public java.lang.String get(java.lang.String,java.util.Map,java.util.Map)
+    115:115:public java.lang.String post(java.lang.String)
+    127:127:public java.lang.String post(java.lang.String,java.util.Map,java.util.List)
+    133:133:public java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    139:139:public java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    150:150:public java.lang.String put(java.lang.String)
+    156:156:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map)
+    162:162:public java.lang.String put(java.lang.String,java.util.Map,java.util.List)
+    168:168:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    174:174:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    180:180:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.lang.String,java.io.File,java.util.List)
+    356:407:public java.lang.String delete(java.lang.String,java.util.Map,java.util.Map)
+com.kaciula.utils.net.IWebService:
+    public static final java.lang.String POST
+    public static final java.lang.String PUT
+    public abstract java.lang.String get(java.lang.String)
+    public abstract java.lang.String get(java.lang.String,java.util.Map,java.util.Map)
+    public abstract java.lang.String post(java.lang.String)
+    public abstract java.lang.String post(java.lang.String,java.util.Map,java.util.List)
+    public abstract java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    public abstract java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    public abstract java.lang.String put(java.lang.String)
+    public abstract java.lang.String put(java.lang.String,java.util.Map,java.util.Map)
+    public abstract java.lang.String put(java.lang.String,java.util.Map,java.util.List)
+    public abstract java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    public abstract java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    public abstract java.lang.String delete(java.lang.String,java.util.Map,java.util.Map)
+com.kaciula.utils.net.LegacyWebService:
+    private static final java.lang.String TAG
+    57:62:public LegacyWebService(boolean)
+    70:70:public java.lang.String get(java.lang.String)
+    76:134:public java.lang.String get(java.lang.String,java.util.Map,java.util.Map)
+    139:139:public java.lang.String post(java.lang.String)
+    151:151:public java.lang.String post(java.lang.String,java.util.Map,java.util.List)
+    157:157:public java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    163:163:public java.lang.String post(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    174:174:public java.lang.String put(java.lang.String)
+    180:180:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map)
+    186:186:public java.lang.String put(java.lang.String,java.util.Map,java.util.List)
+    192:192:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.lang.String)
+    198:198:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.io.File)
+    204:204:public java.lang.String put(java.lang.String,java.util.Map,java.util.Map,java.lang.String,java.io.File,java.util.List)
+    305:361:public java.lang.String delete(java.lang.String,java.util.Map,java.util.Map)
+com.kaciula.utils.net.MultipartParam:
+    17:21:public MultipartParam(java.lang.String,java.lang.String,com.kaciula.utils.net.MultipartParam$ParamType)
+com.kaciula.utils.net.ServiceConstants
+com.kaciula.utils.net.ServiceException:
+    private static final long serialVersionUID
+    public static final int ERROR_HTTP
+    public static final int ERROR_OTHER
+com.kaciula.utils.net.ServiceReturnInfo:
+    public java.lang.String errorMessage
+    public boolean success
+com.kaciula.utils.net.UpdateService
+com.kaciula.utils.net.UpdateService$Prefs
+com.kaciula.utils.provider.SelectionBuilder:
+    private static final boolean LOGV
+    42:45:public com.kaciula.utils.provider.SelectionBuilder reset()
+    78:79:public com.kaciula.utils.provider.SelectionBuilder table(java.lang.String)
+    89:90:public com.kaciula.utils.provider.SelectionBuilder mapToTable(java.lang.String,java.lang.String)
+    94:95:public com.kaciula.utils.provider.SelectionBuilder map(java.lang.String,java.lang.String)
+    99:100:public com.kaciula.utils.provider.SelectionBuilder limit(java.lang.String)
+com.kaciula.utils.provider.UriHandler:
+    6:6:public UriHandler()
+    9:9:public static android.net.Uri buildUri(android.net.Uri,long)
+    13:13:public static android.net.Uri buildUri(android.net.Uri,java.lang.String)
+    17:17:public static java.lang.String getId(android.net.Uri)
+    21:21:public static android.net.Uri addSyncAdapterParameter(android.net.Uri)
 com.kaciula.utils.ui.DialogUtils:
     private static final java.lang.String KEY_DIALOG_ID
     public static final int DIALOG_TYPE_LOADING
@@ -744,43 +846,83 @@ com.kaciula.utils.ui.DialogUtils:
     40:43:public static int getType(int)
 com.kaciula.utils.ui.DialogUtils$BasicDialogInterface
 com.kaciula.utils.ui.DialogUtils$ButtonsDialogInterface
-com.kaciula.utils.ui.RetainFragment
-com.makanstudios.name.BuildConfig
-com.makanstudios.name.Manifest
-com.makanstudios.name.Manifest$permission
-com.makanstudios.name.R
-com.makanstudios.name.R$attr
-com.makanstudios.name.R$bool
-com.makanstudios.name.R$color
-com.makanstudios.name.R$dimen
-com.makanstudios.name.R$drawable
-com.makanstudios.name.R$id
-com.makanstudios.name.R$integer
-com.makanstudios.name.R$layout
-com.makanstudios.name.R$string
-com.makanstudios.name.R$style
-com.makanstudios.name.R$styleable
-com.makanstudios.name.gcm.GCMIntentService:
-    private static final java.lang.String TAG
-com.makanstudios.name.gcm.ServerUtilities:
+com.makanstudios.roadalert.BuildConfig
+com.makanstudios.roadalert.Manifest
+com.makanstudios.roadalert.Manifest$permission
+com.makanstudios.roadalert.R
+com.makanstudios.roadalert.R$attr
+com.makanstudios.roadalert.R$bool
+com.makanstudios.roadalert.R$color
+com.makanstudios.roadalert.R$dimen
+com.makanstudios.roadalert.R$drawable
+com.makanstudios.roadalert.R$layout
+com.makanstudios.roadalert.R$raw
+com.makanstudios.roadalert.R$string
+com.makanstudios.roadalert.R$style
+com.makanstudios.roadalert.R$styleable
+com.makanstudios.roadalert.gcm.GCMIntentService:
+    private static final java.lang.String GCM_MESSAGE_TYPE
+com.makanstudios.roadalert.net.NetService:
     private static final int MAX_ATTEMPTS
     private static final int BACKOFF_MILLI_SECONDS
-    private static final java.lang.String TAG
-    24:24:public ServerUtilities()
-com.makanstudios.name.ui.misc.BasicActivity
-com.makanstudios.name.ui.misc.BasicActivity$1
-com.makanstudios.name.ui.misc.BasicActivity$2
-com.makanstudios.name.ui.misc.BasicFragment
-com.makanstudios.name.ui.misc.BasicListFragment
-com.makanstudios.name.ui.misc.DialogConstants:
+    private static final java.lang.String URL_GCM_REGISTER
+    private static final java.lang.String URL_GCM_UNREGISTER
+com.makanstudios.roadalert.provider.RoadAlertContract
+com.makanstudios.roadalert.provider.RoadAlertContract$SimpleTableColumns
+com.makanstudios.roadalert.provider.RoadAlertContract$Sports
+com.makanstudios.roadalert.provider.RoadAlertContract$UriHandler
+com.makanstudios.roadalert.provider.RoadAlertDatabase:
+    private static final java.lang.String DATABASE_NAME
+    private static final int VERSION_LAUNCH
+    private static final int DATABASE_VERSION
+    26:27:public RoadAlertDatabase(android.content.Context)
+com.makanstudios.roadalert.provider.RoadAlertDatabase$Tables
+com.makanstudios.roadalert.ui.misc.BasicActivity:
+    44:45:public void showMyDialog(int)
+    49:50:public void showMyDialog(int,java.lang.String)
+    54:55:public void showMyDialog(int,int,int,int)
+    60:60:public void showMyDialog(int,int,int,boolean)
+    64:65:public void showMyDialog(int,java.lang.String,java.lang.String[])
+    72:98:private void showDialogs(int,java.lang.String,java.lang.String,java.lang.String[],int,int,int)
+    103:103:public void onItemSelected(int,int)
+    108:108:public void onDateSet(int,android.widget.DatePicker,int,int,int)
+    113:113:public void onTimeSet(int,android.widget.TimePicker,int,int)
+    117:131:public void dismissMyDialog(int,boolean)
+    134:134:public boolean isRestoring()
+    138:138:public boolean isResuming()
+    142:142:public boolean isLaunching()
+com.makanstudios.roadalert.ui.misc.BasicActivity$1
+com.makanstudios.roadalert.ui.misc.BasicActivity$2
+com.makanstudios.roadalert.ui.misc.BasicFragment
+com.makanstudios.roadalert.ui.misc.BasicListFragment
+com.makanstudios.roadalert.ui.misc.DialogConstants:
     public static final int DIALOG_ID_MISC_PROGRESS
     8:8:public DialogConstants()
-com.makanstudios.name.ui.misc.NameActivity
-com.makanstudios.name.ui.misc.NameFragment
-com.makanstudios.name.ui.misc.NameListFragment
-com.makanstudios.name.utils.Constants
-com.makanstudios.name.utils.CustomConstants
-com.makanstudios.name.utils.ExtraConstants
+com.makanstudios.roadalert.ui.misc.DialogFragments
+com.makanstudios.roadalert.ui.misc.DialogFragments$1
+com.makanstudios.roadalert.ui.misc.DialogFragments$2
+com.makanstudios.roadalert.ui.misc.DialogFragments$3
+com.makanstudios.roadalert.ui.misc.DialogFragments$4
+com.makanstudios.roadalert.ui.misc.DialogFragments$5
+com.makanstudios.roadalert.ui.misc.RoadAlertFragment
+com.makanstudios.roadalert.ui.misc.RoadAlertListFragment
+com.makanstudios.roadalert.utils.AppParams:
+    8:8:public AppParams()
+com.makanstudios.roadalert.utils.Constants
+com.makanstudios.roadalert.utils.CustomConstants
+com.makanstudios.roadalert.utils.ExtraConstants
+com.makanstudios.roadalert.utils.FontUtils
+com.makanstudios.roadalert.utils.GlobalUtils:
+    12:12:public GlobalUtils()
+    15:17:public static boolean isFirstTime()
+    29:31:public static int getPreviousVersionCode()
+com.makanstudios.roadalert.utils.GlobalUtils$Prefs
+com.makanstudios.roadalert.utils.StoreUtils
+com.makanstudios.roadalert.widget.CustomButton
+com.makanstudios.roadalert.widget.CustomCheckBox
+com.makanstudios.roadalert.widget.CustomEditText
+com.makanstudios.roadalert.widget.CustomRadioButton
+com.makanstudios.roadalert.widget.CustomTextView
 org.acra.ACRAConfigurationException:
     private static final long serialVersionUID
 org.acra.Compatibility:
@@ -864,21 +1006,43 @@ org.acra.util.HttpUtils:
 org.acra.util.Installation:
     private static final java.lang.String INSTALLATION
     26:26:public Installation()
-org.apache.http.entity.mime.FormBodyPart
-org.apache.http.entity.mime.Header
-org.apache.http.entity.mime.HttpMultipart
-org.apache.http.entity.mime.HttpMultipart$1
-org.apache.http.entity.mime.HttpMultipartMode
-org.apache.http.entity.mime.MIME
-org.apache.http.entity.mime.MinimalField
-org.apache.http.entity.mime.MultipartEntity
-org.apache.http.entity.mime.content.AbstractContentBody
+org.apache.http.entity.mime.Header:
+    68:68:public java.util.List getFields()
+    84:92:public java.util.List getFields(java.lang.String)
+    97:106:public int removeFields(java.lang.String)
+    110:133:public void setField(org.apache.http.entity.mime.MinimalField)
+org.apache.http.entity.mime.HttpMultipart:
+    138:139:public HttpMultipart(java.lang.String,java.nio.charset.Charset,java.lang.String)
+    142:143:public HttpMultipart(java.lang.String,java.lang.String)
+    146:146:public java.lang.String getSubType()
+    150:150:public java.nio.charset.Charset getCharset()
+    154:154:public org.apache.http.entity.mime.HttpMultipartMode getMode()
+org.apache.http.entity.mime.MIME:
+    public static final java.lang.String CONTENT_TYPE
+    public static final java.lang.String CONTENT_TRANSFER_ENC
+    public static final java.lang.String CONTENT_DISPOSITION
+    public static final java.lang.String ENC_8BIT
+    public static final java.lang.String ENC_BINARY
+    36:36:public MIME()
+org.apache.http.entity.mime.content.AbstractContentBody:
+    61:61:public java.lang.String getMediaType()
+    65:65:public java.lang.String getSubType()
 org.apache.http.entity.mime.content.ByteArrayBody
-org.apache.http.entity.mime.content.ContentBody
-org.apache.http.entity.mime.content.ContentDescriptor
-org.apache.http.entity.mime.content.FileBody
+org.apache.http.entity.mime.content.ContentDescriptor:
+    public abstract java.lang.String getMediaType()
+    public abstract java.lang.String getSubType()
+org.apache.http.entity.mime.content.FileBody:
+    85:85:public java.io.InputStream getInputStream()
+    93:94:public void writeTo(java.io.OutputStream,int)
+    130:130:public java.io.File getFile()
 org.apache.http.entity.mime.content.InputStreamBody
-org.apache.http.entity.mime.content.StringBody
+org.apache.http.entity.mime.content.StringBody:
+    58:60:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String,java.lang.String,java.nio.charset.Charset)
+    69:69:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String,java.nio.charset.Charset)
+    76:76:public static org.apache.http.entity.mime.content.StringBody create(java.lang.String)
+    113:114:public StringBody(java.lang.String,java.nio.charset.Charset)
+    130:130:public java.io.Reader getReader()
+    140:141:public void writeTo(java.io.OutputStream,int)
 org.joda.time.Chronology
 org.joda.time.DateMidnight
 org.joda.time.DateMidnight$Property

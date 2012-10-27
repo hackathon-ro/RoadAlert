@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Name</string>
+    <string name="app_name">Road Alert</string>
     <string name="hello_world">Hello world!</string>
     <string name="no_google_play">Google Play not available</string>
     <string name="no_amazon_store">Amazon App Store not available</string>
