@@ -7,6 +7,7 @@
 
 
         <!-- My own style -->
+        <item name="android:windowNoTitle">true</item>
         <item name="android:textViewStyle">@style/Name_TextView</item>
         <item name="android:textAppearance">@style/Name_TextAppearance</item>
     </style>

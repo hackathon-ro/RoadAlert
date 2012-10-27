@@ -20,7 +20,6 @@ public interface CustomConstants {
 
     String GCM_NEW_NOTIFICATION_INTENT = "com.makanstudios.roadalert.intent.GCM_NEW_NOTIFICATION";
 
-    // FIXME: keystore different because it is public
     String API_KEYSTORE_TYPE = "BKS";
 
     String API_KEYSTORE_PASS = "Macaw987";
@@ -28,4 +27,6 @@ public interface CustomConstants {
     String API_USERNAME = "roadalert";
 
     String API_PASSWORD = "Police";
+
+    int TRIGGER_SYNC_MAX_JITTER_MILLIS = 3 * 1000; // 3 seconds
 }

@@ -3,12 +3,13 @@ package com.makanstudios.roadalert.ui.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.cyrilmottier.polaris.Annotation;
@@ -20,10 +21,11 @@ import com.cyrilmottier.polaris.PolarisMapView.OnRegionChangedListener;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.makanstudios.roadalert.R;
+import com.makanstudios.roadalert.net.SendRoadAlertService;
 import com.makanstudios.roadalert.utils.Config;
 
 public class MainActivity extends MapActivity implements OnRegionChangedListener,
-        OnAnnotationSelectionChangedListener {
+        OnAnnotationSelectionChangedListener, OnClickListener {
 
     private static final String LOG_TAG = "MainActivity";
 
@@ -88,7 +90,9 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
 
         setContentView(R.layout.activity_main);
 
-        mMapView = new PolarisMapView(this, Config.GOOGLE_MAPS_API_KEY);
+        findViewById(R.id.alert).setOnClickListener(this);
+
+        mMapView = (PolarisMapView) findViewById(R.id.polaris_map_view);
         mMapView.setUserTrackingButtonEnabled(true);
         mMapView.setOnRegionChangedListenerListener(this);
         mMapView.setOnAnnotationSelectionChangedListener(this);
@@ -109,10 +113,6 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
             }
         }
         mMapView.setAnnotations(annotations, R.drawable.map_pin_holed_blue);
-
-        final FrameLayout mapViewContainer = (FrameLayout) findViewById(R.id.map_view_container);
-        mapViewContainer.addView(mMapView, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT));
     }
 
     @Override
@@ -178,6 +178,12 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         }
         Toast.makeText(this, getString(R.string.annotation_clicked, annotation.getTitle()),
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, SendRoadAlertService.class);
+        startService(intent);
     }
 
 }

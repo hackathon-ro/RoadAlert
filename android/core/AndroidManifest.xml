@@ -6,11 +6,18 @@
 
     <!-- If you want to be available for Google TV, android:required="false" -->
     <uses-feature android:name="android.hardware.touchscreen" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -85,6 +92,7 @@
                 <action android:name="com.makanstudios.roadalert.intent.GCM_NEW_NOTIFICATION" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".gcm.TriggerSyncReceiver" />
 
         <!--
           Application-specific subclass of GCMBaseIntentService that will
@@ -92,6 +100,12 @@
         -->
         <service
             android:name=".gcm.GCMIntentService"
+            android:exported="false" />
+        <service
+            android:name=".net.SendRoadAlertService"
+            android:exported="false" />
+        <service
+            android:name=".net.UpdateRoadAlertService"
             android:exported="false" />
 
         <provider

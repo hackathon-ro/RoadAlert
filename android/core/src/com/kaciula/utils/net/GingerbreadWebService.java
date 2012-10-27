@@ -327,7 +327,10 @@ public class GingerbreadWebService implements IWebService {
                     LogUtils.d("POST RESPONSE=" + body);
 
                     return body;
-                } else
+                } else if (responseCode > 200 && responseCode < 300) {
+                    // Do nothing. It's ok
+                }
+                else
                     throw new ServiceException(responseCode);
             } catch (IOException ioe) {
                 LogUtils.printStackTrace(ioe);

@@ -274,8 +274,13 @@ public class LegacyWebService implements IWebService {
             int responseCode = response.getStatusLine().getStatusCode();
             LogUtils.d(TAG, "responseCode = " + responseCode);
 
-            if (responseCode != HttpStatus.SC_OK)
-                throw new ServiceException(responseCode);
+            if (responseCode != HttpStatus.SC_OK) {
+                if (responseCode > 200 && responseCode < 300) {
+                    // Do nothing. It's ok
+                    return null;
+                } else
+                    throw new ServiceException(responseCode);
+            }
             // --> Mugur - 28.06.2012 - this should be better; not dependent on
             // UTF8 encoding
             body = EntityUtils.toString(response.getEntity());

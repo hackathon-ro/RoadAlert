@@ -72,6 +72,8 @@ public interface MiscConstants {
 
     String NET_HEADER_CONTENT_TYPE_MULTIPART = "multipart/form-data; boundary=";
 
+    String NET_HEADER_ACCEPT = "Accept";
+
     String NET_TYPE_APPLICATION_JSON = "application/json";
 
     String REGEX_EMAIL = "^([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)$";

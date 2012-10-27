@@ -5,5 +5,7 @@
     <string name="no_google_play">Google Play not available</string>
     <string name="no_amazon_store">Amazon App Store not available</string>
     <string name="annotation_clicked">Annotation \'%1$s\' clicked</string>
+    <string name="map_api_key_debug">00ENaMd-f7udjuiwbDpqJU12P_M4TCh3x2M5aWw</string>
+    <string name="map_api_key_release">00ENaMd-f7ueoinzKXRjXniqxmsmTwi8HFgKzCw</string>
 
 </resources>
