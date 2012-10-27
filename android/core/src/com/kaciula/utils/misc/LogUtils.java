@@ -3,7 +3,7 @@ package com.kaciula.utils.misc;
 
 import android.util.Log;
 
-import com.makanstudios.name.BuildConfig;
+import com.makanstudios.roadalert.BuildConfig;
 
 /**
  * Wrapper for logging so that it is easy to disable logging on release builds.
