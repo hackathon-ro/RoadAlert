@@ -47,7 +47,7 @@
         android:logo="@drawable/ic_launcher"
         android:theme="@style/Theme.Name" >
         <activity
-            android:name=".ui.activity.DelegateActivity"
+            android:name=".ui.activity.MainActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name" >
             <intent-filter>
