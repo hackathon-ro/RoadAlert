@@ -10,6 +10,7 @@ import com.kaciula.utils.net.ServiceException;
 import com.kaciula.utils.net.ServiceReturnInfo;
 import com.makanstudios.roadalert.model.Alert;
 import com.makanstudios.roadalert.provider.AlertsQuery;
+import com.makanstudios.roadalert.utils.NotificationUtils;
 
 public class UpdateRoadAlertService extends ApiService {
 
@@ -43,6 +44,10 @@ public class UpdateRoadAlertService extends ApiService {
                     cursor.close();
                 }
             }
+
+            // TODO: put alert id here
+            int alertId = 2;
+            NotificationUtils.showNotification(alertId);
 
             retInfo.success = true;
         } catch (ServiceException se) {

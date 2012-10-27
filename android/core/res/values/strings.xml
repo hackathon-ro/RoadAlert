@@ -7,5 +7,6 @@
     <string name="annotation_clicked">Annotation \'%1$s\' clicked</string>
     <string name="map_api_key_debug">00ENaMd-f7udjuiwbDpqJU12P_M4TCh3x2M5aWw</string>
     <string name="map_api_key_release">00ENaMd-f7ueoinzKXRjXniqxmsmTwi8HFgKzCw</string>
+    <string name="alert_ahead">Radar ahead</string>
 
 </resources>
