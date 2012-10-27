@@ -4,5 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="no_google_play">Google Play not available</string>
     <string name="no_amazon_store">Amazon App Store not available</string>
+    <string name="annotation_clicked">Annotation \'%1$s\' clicked</string>
 
 </resources>

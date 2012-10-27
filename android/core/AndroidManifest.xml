@@ -47,7 +47,7 @@
         android:logo="@drawable/ic_launcher"
         android:theme="@style/Theme.RoadAlert" >
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.DelegateActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name" >
             <intent-filter>
@@ -56,6 +56,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/app_name" />
 
         <!--
           BroadcastReceiver that will receive intents from GCM
@@ -98,6 +101,8 @@
             android:name=".provider.RoadAlertProvider"
             android:authorities="com.makanstudios.roadalert.provider"
             android:exported="false" />
+
+        <uses-library android:name="com.google.android.maps" />
     </application>
 
 </manifest>
