@@ -8,14 +8,14 @@
 
 	<listener>
 		<listener-class>
-			com.makanstudios.conscious.api.gcm.Initializer
+			com.makanstudios.roadalert.api.gcm.Initializer
 		</listener-class>
 	</listener>
 
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<servlet-class>
-			com.makanstudios.conscious.api.gcm.RegisterServlet
+			com.makanstudios.roadalert.api.gcm.RegisterServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -28,7 +28,7 @@
 	<servlet>
 		<servlet-name>UnregisterServlet</servlet-name>
 		<servlet-class>
-			com.makanstudios.conscious.api.gcm.UnregisterServlet
+			com.makanstudios.roadalert.api.gcm.UnregisterServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -41,7 +41,7 @@
 	<servlet>
 		<servlet-name>SendAllMessagesServlet</servlet-name>
 		<servlet-class>
-			com.makanstudios.conscious.api.gcm.SendAllMessagesServlet
+			com.makanstudios.roadalert.api.gcm.SendAllMessagesServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -54,7 +54,7 @@
 		<servlet>
 		<servlet-name>HomeServlet</servlet-name>
 		<servlet-class>
-		com.makanstudios.conscious.api.gcm.HomeServlet
+		com.makanstudios.roadalert.api.gcm.HomeServlet
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 		</servlet>
@@ -74,7 +74,7 @@
 				com.sun.jersey.config.property.packages
 			</param-name>
 			<param-value>
-				com.makanstudios.conscious.api.resources;org.codehaus.jackson.jaxrs
+				com.makanstudios.roadalert.api.resources;org.codehaus.jackson.jaxrs
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

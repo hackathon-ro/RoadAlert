@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<h1>GCM for Conscious</h1>
+<h1>GCM for Road Alert</h1>
 Choose type of gcm message!
 <br />
 -----------------------------------------------
