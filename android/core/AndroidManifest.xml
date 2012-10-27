@@ -4,9 +4,6 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <!-- FIXME: Replace all occurrences of name with the actual app name -->
-
-
     <!-- If you want to be available for Google TV, android:required="false" -->
     <uses-feature android:name="android.hardware.touchscreen" />
 

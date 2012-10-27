@@ -10,10 +10,13 @@ public interface CustomConstants {
 
     int DEVELOPER_SIGNATURE_RELEASE = 1615067630;
 
-    // FIXME: Replace GCM constants with the right ones
-    String GCM_SENDER_ID = "839376984937";
+    String API_ENDPOINT = "https://api.makan-studios.com:8443";
 
-    String GCM_SERVER_URL = "http://makan-studios.com:9080/gcm-server-rc-pro";
+    String API_PATH = API_ENDPOINT + "/roadalert/v1";
+
+    String GCM_SENDER_ID = "851909760106";
+
+    String GCM_SERVER_URL = API_ENDPOINT + "/roadalert/gcm";
 
     String GCM_NEW_NOTIFICATION_INTENT = "com.makanstudios.roadalert.intent.GCM_NEW_NOTIFICATION";
 

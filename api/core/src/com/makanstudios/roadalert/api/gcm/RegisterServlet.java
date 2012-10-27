@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.makanstudios.roadalert.api.dao.MainDao;
 import com.makanstudios.roadalert.api.model.Gcm;
-import com.makanstudios.roadalert.api.model.User;
 
 /**
  * Servlet that registers a device, whose registration id is identified by
@@ -37,16 +36,11 @@ public class RegisterServlet extends BaseServlet {
 
 	private static final String PARAMETER_REG_ID = "regId";
 
-	private static final String PARAMETER_USER_ID = "userId";
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
 		String regId = getParameter(req, PARAMETER_REG_ID);
-		String userId = getParameter(req, PARAMETER_USER_ID);
-		User user = new User();
-		user.id = Long.parseLong(userId);
-		Gcm gcm = new Gcm(regId, user);
+		Gcm gcm = new Gcm(regId);
 		System.out.println("Register gcm device");
 		MainDao.instance.registerGcmDevice(gcm);
 		setSuccess(resp);
