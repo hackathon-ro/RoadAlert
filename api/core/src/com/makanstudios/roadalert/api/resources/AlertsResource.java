@@ -9,19 +9,20 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.google.android.gcm.server.Message;
 import com.makanstudios.roadalert.api.dao.MainDao;
-import com.makanstudios.roadalert.api.model.Id;
-import com.makanstudios.roadalert.api.model.User;
+import com.makanstudios.roadalert.api.gcm.GcmUtils;
+import com.makanstudios.roadalert.api.model.Alert;
+import com.makanstudios.roadalert.api.utils.CustomConstants;
 
-@Path("/users")
-public class UsersResource {
+@Path("/alerts")
+public class AlertsResource {
 
 	@Context
 	UriInfo uriInfo;
@@ -31,39 +32,39 @@ public class UsersResource {
 
 	@GET
 	@Produces(MediaType.TEXT_XML)
-	public List<User> getUsersBrowser() {
-		return MainDao.instance.getUsers();
+	public List<Alert> getAlertsBrowser() {
+		return getAlerts();
 	}
 
 	@GET
 	@Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public List<User> getUsers(@QueryParam("email")
-	String email) {
-		if (email != null)
-			return MainDao.instance.getUsers(email);
-		else
-			return MainDao.instance.getUsers();
+	public List<Alert> getAlerts() {
+		return MainDao.instance.getAlerts();
 	}
 
 	@POST
 	@Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Id addUser(User user) {
-		long id = MainDao.instance.addReplaceUser(user);
-		return new Id(id);
+	public void addAlert(Alert alert) {
+		MainDao.instance.addReplaceAlert(alert);
+
+		Message.Builder builder = new Message.Builder();
+		builder.addData(CustomConstants.GCM_MESSAGE_TYPE, ""
+				+ CustomConstants.GCM_MESSAGE_TYPE_SYNC);
+		GcmUtils.sendMessageToAll(builder.build());
 	}
 
 	@DELETE
-	public Response deleteAllUsers() {
-		MainDao.instance.deleteAllUsers();
+	public Response deleteAllAlerts() {
+		MainDao.instance.deleteAllAlerts();
 
 		Response res = Response.noContent().build();
 		return res;
 	}
 
-	@Path("{user}")
-	public UserResource getUser(@PathParam("user")
+	@Path("{alert}")
+	public AlertResource getAlert(@PathParam("alert")
 	String id) {
-		return new UserResource(uriInfo, request, id);
+		return new AlertResource(uriInfo, request, id);
 	}
 }

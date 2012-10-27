@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Gcm {
@@ -19,15 +17,10 @@ public class Gcm {
 	@Column(length = 2047)
 	public String regId;
 
-	@JoinColumn
-	@ManyToOne
-	public User user;
-
 	public Gcm() {
 	}
 
-	public Gcm(String regId, User user) {
+	public Gcm(String regId) {
 		this.regId = regId;
-		this.user = user;
 	}
 }

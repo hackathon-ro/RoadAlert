@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import android.text.TextUtils;
 import android.util.Base64;
 
 import com.google.android.gcm.GCMRegistrar;
@@ -15,6 +18,7 @@ import com.kaciula.utils.net.IWebService;
 import com.kaciula.utils.net.ServiceException;
 import com.kaciula.utils.ui.BasicApplication;
 import com.makanstudios.roadalert.R;
+import com.makanstudios.roadalert.model.Alert;
 import com.makanstudios.roadalert.utils.CustomConstants;
 
 public class NetService {
@@ -24,6 +28,8 @@ public class NetService {
     private static NetService instance;
 
     private IWebService service;
+
+    private ObjectMapper mapper;
 
     private static final int MAX_ATTEMPTS = 5;
 
@@ -35,9 +41,12 @@ public class NetService {
 
     private static final String URL_GCM_UNREGISTER = CustomConstants.GCM_SERVER_URL + "/unregister";
 
+    private static final String URL_API_ALERTS = CustomConstants.API_PATH + "/alerts";
+
     private NetService() {
         service = PlatformSpecificFactory.getWebService(R.raw.keystore_makan_studios,
                 CustomConstants.API_KEYSTORE_TYPE, CustomConstants.API_KEYSTORE_PASS, 0);
+        mapper = new ObjectMapper();
     }
 
     public static NetService getInstance() {
@@ -45,6 +54,38 @@ public class NetService {
             instance = new NetService();
 
         return instance;
+    }
+
+    public Alert[] getAlerts() throws ServiceException {
+        Map<String, String> headers = getHeaders();
+        try {
+            String body = service.get(URL_API_ALERTS, headers, null);
+            if (!TextUtils.isEmpty(body)) {
+                Alert[] alerts = mapper.readValue(body, Alert[].class);
+                return alerts;
+            }
+        } catch (Exception e) {
+            LogUtils.printStackTrace(e);
+        }
+
+        throw new ServiceException();
+    }
+
+    public void addAlert(Alert alert) throws ServiceException {
+        /*
+         * Map<String, String> headers = getHeaders(); try {
+         * service.post(URL_API_ALERTS, headers, params); } catch
+         * (ServiceException se) { LogUtils.printStackTrace(se); }
+         */
+    }
+
+    public void deleteAllAlerts() throws ServiceException {
+        Map<String, String> headers = getHeaders();
+        try {
+            service.delete(URL_API_ALERTS, headers, null);
+        } catch (ServiceException se) {
+            LogUtils.printStackTrace(se);
+        }
     }
 
     /**
@@ -58,13 +99,7 @@ public class NetService {
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
 
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put(MiscConstants.NET_HEADER_CONTENT_TYPE,
-                MiscConstants.NET_HEADER_CONTENT_TYPE_WWW);
-        String auth = Base64.encodeToString(
-                (CustomConstants.API_USERNAME + ":" + CustomConstants.API_PASSWORD).getBytes(),
-                Base64.URL_SAFE | Base64.NO_WRAP);
-        headers.put(MiscConstants.NET_HEADER_AUTHORIZATION, "Basic " + auth);
+        Map<String, String> headers = getHeaders();
 
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
@@ -108,11 +143,25 @@ public class NetService {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
+
+        Map<String, String> headers = getHeaders();
+
         try {
-            service.post(URL_GCM_UNREGISTER, null, params);
+            service.post(URL_GCM_UNREGISTER, headers, params);
             GCMRegistrar.setRegisteredOnServer(BasicApplication.getContext(), false);
         } catch (ServiceException se) {
             LogUtils.printStackTrace(se);
         }
+    }
+
+    private Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put(MiscConstants.NET_HEADER_CONTENT_TYPE,
+                MiscConstants.NET_HEADER_CONTENT_TYPE_WWW);
+        String auth = Base64.encodeToString(
+                (CustomConstants.API_USERNAME + ":" + CustomConstants.API_PASSWORD).getBytes(),
+                Base64.URL_SAFE | Base64.NO_WRAP);
+        headers.put(MiscConstants.NET_HEADER_AUTHORIZATION, "Basic " + auth);
+        return headers;
     }
 }

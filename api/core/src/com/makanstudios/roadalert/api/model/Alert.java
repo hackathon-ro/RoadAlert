@@ -9,24 +9,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class User {
+public class Alert {
 
 	@Column
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long id;
 
-	@Column(length = 255)
-	public String name;
+	@Column
+	public long lat;
 
-	@Column(length = 255)
-	public String email;
+	@Column
+	public long lon;
 
-	public User() {
+	@Column
+	public long timestamp;
+
+	public Alert() {
 	}
 
 	@Override
 	public String toString() {
-		return "[" + id + "] " + name + " " + email;
+		return "[" + id + "] " + lat + " - " + lon + "]";
 	}
 }
