@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes,MissingTranslation,UnusedResources">
+
+    <string name="ga_trackingId"> <!-- FIXME: Add tracking ID -->
+    </string>
+
+    <!-- Enable Activity tracking -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!-- Screen names -->
+    <!-- FIXME: Add tracking activities -->
+    <!-- <string name="com.makanstudios.ui.activity.XActivity">X Activity</string> -->
+
+
+    <!-- Enable automatic exception tracking -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <!-- Use for debugging purposes -->
+    <bool name="ga_debug">false</bool>
+
+</resources>
