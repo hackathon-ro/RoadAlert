@@ -14,7 +14,8 @@ public class Alert {
     public Alert() {
     }
 
-    public Alert(long lat, long lon) {
+    public Alert(long id, long lat, long lon) {
+        this.id = id;
         this.lat = lat;
         this.lon = lon;
     }

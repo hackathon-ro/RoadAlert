@@ -72,20 +72,29 @@ public class NetService {
     }
 
     public void addAlert(Alert alert) throws ServiceException {
-        /*
-         * Map<String, String> headers = getHeaders(); try {
-         * service.post(URL_API_ALERTS, headers, params); } catch
-         * (ServiceException se) { LogUtils.printStackTrace(se); }
-         */
+
+        Map<String, String> headers = getHeaders();
+        try {
+            String body = mapper.writeValueAsString(alert);
+            service.post(URL_API_ALERTS, headers, null, body);
+            return;
+        } catch (Exception e) {
+            LogUtils.printStackTrace(e);
+        }
+
+        throw new ServiceException();
     }
 
     public void deleteAllAlerts() throws ServiceException {
         Map<String, String> headers = getHeaders();
         try {
             service.delete(URL_API_ALERTS, headers, null);
+            return;
         } catch (ServiceException se) {
             LogUtils.printStackTrace(se);
         }
+
+        throw new ServiceException();
     }
 
     /**

@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.kaciula.utils.misc.LogUtils;
+import com.makanstudios.roadalert.provider.RoadAlertContract.AlertColumns;
 
 public class RoadAlertDatabase extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "name.db";
+    private static final String DATABASE_NAME = "roadalert.db";
 
     private static final int VERSION_LAUNCH = 1;
 
@@ -18,8 +19,7 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
 
     public interface Tables {
 
-        // FIXME: Create a real table
-        String SIMPLE_TABLE = "simple_table";
+        String ALERTS = "alerts";
     }
 
     public RoadAlertDatabase(Context context) {
@@ -28,8 +28,14 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + Tables.SIMPLE_TABLE + " (" + BaseColumns._ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT" + ")");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + Tables.ALERTS + " (" + BaseColumns._ID
+                + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + AlertColumns.ALERT_ID + " INTEGER NOT NULL DEFAULT 0,"
+                + AlertColumns.LAT + " INTEGER NOT NULL DEFAULT 0,"
+                + AlertColumns.LON + " INTEGER NOT NULL DEFAULT 0,"
+                + AlertColumns.TIMESTAMP + " INTEGER NOT NULL DEFAULT 0,"
+                + "UNIQUE (" + AlertColumns.ALERT_ID + ") ON CONFLICT REPLACE"
+                + ")");
     }
 
     @Override
@@ -52,7 +58,7 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
 
         LogUtils.d("after upgrade logic, at version " + version);
         if (version != DATABASE_VERSION) {
-            db.execSQL("DROP TABLE IF EXISTS " + Tables.SIMPLE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.ALERTS);
             onCreate(db);
         }
     }

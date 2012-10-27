@@ -10,17 +10,23 @@ public class RoadAlertContract {
 
     private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    interface SimpleTableColumns {
+    interface AlertColumns {
 
-        String SIMPLE_COLUMN = "simple_column";
+        String ALERT_ID = "alert_id";
+
+        String LAT = "lat";
+
+        String LON = "lon";
+
+        String TIMESTAMP = "timestamp";
     }
 
-    static final String PATH_SIMPLE_TABLE = "simple_table";
+    static final String PATH_ALERTS = "alerts";
 
-    public static class Sports implements SimpleTableColumns, BaseColumns {
+    public static class Alerts implements AlertColumns, BaseColumns {
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_SIMPLE_TABLE)
+                .appendPath(PATH_ALERTS)
                 .build();
 
         public static final String DEFAULT_SORT_ORDER = BaseColumns._ID + " ASC";

@@ -1,45 +1,39 @@
 
 package com.makanstudios.roadalert.test.api;
 
-import java.io.File;
-import java.security.Security;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
-
-import junit.framework.TestCase;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import android.content.Context;
+import android.test.AndroidTestCase;
 
 import com.kaciula.utils.net.ServiceException;
+import com.kaciula.utils.ui.BasicApplication;
 import com.makanstudios.roadalert.model.Alert;
 import com.makanstudios.roadalert.net.NetService;
-import com.makanstudios.roadalert.utils.CustomConstants;
 
-public class Api extends TestCase {
+public class Api extends AndroidTestCase {
 
     private static final long[][] alertData = {
             {
-                    55755800, 37617600
+                    1, 55755800, 37617600
             }, {
-                    59332800, 18064500
+                    2, 59332800, 18064500
             }, {
-                    59939000, 30315800
+                    3, 59939000, 30315800
             }, {
-                    60169800, 24938200
+                    4, 60169800, 24938200
             }, {
-                    60451400, 22268700
+                    5, 60451400, 22268700
             }, {
-                    59438900, 24754500
+                    6, 59438900, 24754500
             }, {
-                    66498700, 25721100
+                    7, 66498700, 25721100
             }
     };
 
+    private Context ctx;
+
     public void setUp() throws Exception {
-        initApi();
-        cleanupDb();
+        ctx = BasicApplication.getContext();
+        // cleanupDb();
     }
 
     public void tearDown() throws Exception {
@@ -59,7 +53,7 @@ public class Api extends TestCase {
             assertEquals(0, alerts.length);
 
             for (int i = 0; i < alertData.length; i++) {
-                createAlert(alertData[i][0], alertData[i][1]);
+                createAlert(alertData[i][0], alertData[i][1], alertData[i][2]);
             }
 
             alerts = NetService.getInstance().getAlerts();
@@ -70,10 +64,10 @@ public class Api extends TestCase {
         }
     }
 
-    private Alert createAlert(long lat, long lon) {
+    private Alert createAlert(long id, long lat, long lon) {
         Alert alert;
         try {
-            alert = new Alert(lat, lon);
+            alert = new Alert(id, lat, lon);
             NetService.getInstance().addAlert(alert);
         } catch (ServiceException se) {
             fail("Could not create alert on the server");
@@ -81,20 +75,5 @@ public class Api extends TestCase {
         }
 
         return alert;
-    }
-
-    private void initApi() {
-        Security.addProvider(new BouncyCastleProvider());
-
-        File file = new File("keystore_makan_studios.bks");
-        HttpsURLConnection.setDefaultSSLSocketFactory(NetUtils.getFactory(file,
-                CustomConstants.API_KEYSTORE_TYPE,
-                CustomConstants.API_KEYSTORE_PASS));
-
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
     }
 }

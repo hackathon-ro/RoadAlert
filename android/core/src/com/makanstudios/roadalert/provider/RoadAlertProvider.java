@@ -8,8 +8,15 @@ import android.net.Uri;
 
 import com.kaciula.utils.provider.BasicContentProvider;
 import com.kaciula.utils.provider.SelectionBuilder;
+import com.kaciula.utils.provider.UriHandler;
+import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
+import com.makanstudios.roadalert.provider.RoadAlertDatabase.Tables;
 
 public class RoadAlertProvider extends BasicContentProvider {
+
+    private static final int ALERTS = 100;
+
+    private static final int ALERTS_ID = 101;
 
     public RoadAlertProvider() {
         super(RoadAlertDatabase.class);
@@ -18,10 +25,10 @@ public class RoadAlertProvider extends BasicContentProvider {
     @Override
     protected UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        // FIXME: Build uri matcher
-        // final String authority = YapperContract.CONTENT_AUTHORITY;
+        final String authority = RoadAlertContract.CONTENT_AUTHORITY;
 
-        // matcher.addURI(authority, YapperContract.PATH_SPORTS, SPORTS);
+        matcher.addURI(authority, RoadAlertContract.PATH_ALERTS, ALERTS);
+        matcher.addURI(authority, RoadAlertContract.PATH_ALERTS + "/*", ALERTS_ID);
 
         return matcher;
     }
@@ -30,7 +37,11 @@ public class RoadAlertProvider extends BasicContentProvider {
     protected SelectionBuilder buildSimpleSelection(Uri uri, int match) {
         final SelectionBuilder builder = new SelectionBuilder();
         switch (match) {
-        // FIXME: build selection based on match
+            case ALERTS:
+                return builder.table(Tables.ALERTS);
+            case ALERTS_ID:
+                return builder.table(Tables.ALERTS).where(Alerts.ALERT_ID + "= ?",
+                        UriHandler.getId(uri));
         }
 
         return builder;
@@ -40,7 +51,11 @@ public class RoadAlertProvider extends BasicContentProvider {
     protected SelectionBuilder buildExpandedSelection(Uri uri, int match) {
         final SelectionBuilder builder = new SelectionBuilder();
         switch (match) {
-        // FIXME: build selection based on match
+            case ALERTS:
+                return builder.table(Tables.ALERTS);
+            case ALERTS_ID:
+                return builder.table(Tables.ALERTS).where(Alerts.ALERT_ID + "= ?",
+                        UriHandler.getId(uri));
         }
 
         return builder;
@@ -50,12 +65,12 @@ public class RoadAlertProvider extends BasicContentProvider {
     protected Uri doInsert(SQLiteDatabase db, Uri uri, int match, ContentValues values) {
         Uri newUri = null;
         switch (match) {
-        // FIXME: Do inserts based on match
-        /*
-         * case X: db.insertOrThrow(Tables.SPORTS, null, values); newUri =
-         * UriHandler.buildUri(Sports.CONTENT_URI,
-         * values.getAsString(Sports.SPORT_ID)); break;
-         */
+            case ALERTS:
+                db.insertOrThrow(Tables.ALERTS, null, values);
+                newUri =
+                        UriHandler.buildUri(Alerts.CONTENT_URI,
+                                values.getAsString(Alerts.ALERT_ID));
+                break;
         }
 
         return newUri;
