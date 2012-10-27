@@ -37,7 +37,7 @@ public class RoadAlertApplication extends BasicApplication {
     private void init() {
         DialogUtils.setMapping(DialogConstants.mapping);
 
-        LogUtils.init("name_", false);
+        LogUtils.init("roadalert_", false);
 
         /* GlobalUtils.saveVersionCode(MiscUtils.getCurrentVersionCode()); */
 

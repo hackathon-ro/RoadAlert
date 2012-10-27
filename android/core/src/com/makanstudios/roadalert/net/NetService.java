@@ -171,6 +171,10 @@ public class NetService {
                 (CustomConstants.API_USERNAME + ":" + CustomConstants.API_PASSWORD).getBytes(),
                 Base64.URL_SAFE | Base64.NO_WRAP);
         headers.put(MiscConstants.NET_HEADER_AUTHORIZATION, "Basic " + auth);
+        headers.put(MiscConstants.NET_HEADER_CONTENT_TYPE,
+                MiscConstants.NET_HEADER_CONTENT_TYPE_JSON);
+        headers.put(MiscConstants.NET_HEADER_ACCEPT,
+                MiscConstants.NET_TYPE_APPLICATION_JSON);
         return headers;
     }
 }

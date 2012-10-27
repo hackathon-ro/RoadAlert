@@ -1,6 +1,10 @@
 
 package com.makanstudios.roadalert.gcm;
 
+import java.util.Random;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +24,10 @@ public class GCMIntentService extends GCMBaseIntentService {
     private static final String TAG = LogUtils.makeLogTag(GCMIntentService.class.getSimpleName());
 
     private static final String GCM_MESSAGE_TYPE = "gcm_message_type";
+
+    private static final int GCM_MESSAGE_TYPE_SYNC = 0;
+
+    private static final Random sRandom = new Random();
 
     public GCMIntentService() {
         super(CustomConstants.GCM_SENDER_ID);
@@ -59,6 +67,9 @@ public class GCMIntentService extends GCMBaseIntentService {
             int type = Integer.parseInt(extras.getString(GCM_MESSAGE_TYPE));
 
             switch (type) {
+                case GCM_MESSAGE_TYPE_SYNC:
+                    scheduleSync(context, extras);
+                    break;
                 default:
                     return;
             }
@@ -66,11 +77,26 @@ public class GCMIntentService extends GCMBaseIntentService {
             // sendOrderedBroadcast(new Intent(which_action), null);
         } catch (NumberFormatException nfe) {
         }
+    }
 
-        // String message = getString(R.string.gcm_message);
-        // displayMessage(context, message);
-        // notifies user
-        // generateNotification(context, message);
+    private void scheduleSync(Context context, Bundle extras) {
+        int jitterMillis = (int) (sRandom.nextFloat() * CustomConstants.TRIGGER_SYNC_MAX_JITTER_MILLIS);
+        final String debugMessage = "Received message to trigger sync; "
+                + "jitter = " + jitterMillis + "ms";
+        LogUtils.d(TAG, debugMessage);
+
+        Intent intent = new Intent(context, TriggerSyncReceiver.class);
+        intent.putExtras(extras);
+
+        ((AlarmManager) context.getSystemService(ALARM_SERVICE))
+                .set(
+                        AlarmManager.RTC,
+                        System.currentTimeMillis() + jitterMillis,
+                        PendingIntent.getBroadcast(
+                                context,
+                                0,
+                                intent,
+                                PendingIntent.FLAG_CANCEL_CURRENT));
     }
 
     @Override
