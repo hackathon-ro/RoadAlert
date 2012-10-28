@@ -14,6 +14,11 @@ import com.kaciula.utils.ui.BasicApplication;
 @SuppressLint("CommitPrefEdits")
 public class GlobalUtils {
 
+    public static String getDeviceId() {
+        return android.provider.Settings.Secure.getString(BasicApplication.getContext()
+                .getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+    }
+
     public static long getLatestSync() {
         SharedPreferences prefs = BasicApplication.getContext().getSharedPreferences(Prefs.GLOBAL,
                 Context.MODE_PRIVATE);

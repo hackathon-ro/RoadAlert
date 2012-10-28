@@ -69,6 +69,7 @@ public class DatabaseHandler {
         values.put(Alerts.LAT, alert.lat);
         values.put(Alerts.LON, alert.lon);
         values.put(Alerts.TIMESTAMP, alert.timestamp);
+        values.put(Alerts.DEVICE_ID, alert.deviceId);
 
         return values;
     }

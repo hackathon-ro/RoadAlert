@@ -11,6 +11,8 @@ public class Alert {
 
     public long timestamp;
 
+    public String deviceId;
+
     public Alert() {
     }
 
@@ -25,11 +27,12 @@ public class Alert {
         this.lon = lon;
     }
 
-    public Alert(long id, long lat, long lon, long timestamp) {
+    public Alert(long id, long lat, long lon, long timestamp, String deviceId) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.timestamp = timestamp;
+        this.deviceId = deviceId;
     }
 
     @Override

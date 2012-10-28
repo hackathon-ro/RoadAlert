@@ -21,6 +21,8 @@ public class RoadAlertContract {
         String TIMESTAMP = "timestamp";
 
         String NOTIFIED = "notified";
+
+        String DEVICE_ID = "device_id";
     }
 
     static final String PATH_ALERTS = "alerts";

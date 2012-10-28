@@ -25,6 +25,9 @@ public class Alert {
 	@Column
 	public long timestamp;
 
+	@Column(length = 1000)
+	public String deviceId;
+
 	public Alert() {
 	}
 
