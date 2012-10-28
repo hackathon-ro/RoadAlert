@@ -12,7 +12,8 @@ public interface AlertsQuery {
             Alerts.ALERT_ID,
             Alerts.LAT,
             Alerts.LON,
-            Alerts.TIMESTAMP
+            Alerts.TIMESTAMP,
+            Alerts.NOTIFIED
     };
 
     int ALERT_ID = 1;
@@ -22,4 +23,6 @@ public interface AlertsQuery {
     int LON = 3;
 
     int TIMESTAMP = 4;
+
+    int NOTIFIED = 5;
 }

@@ -49,6 +49,14 @@ public class DatabaseHandler {
         ctx.getContentResolver().insert(Alerts.CONTENT_URI, values);
     }
 
+    public static void updateAlertNotified(long alertId) {
+        Context ctx = BasicApplication.getContext();
+        ContentValues values = new ContentValues();
+        values.put(Alerts.NOTIFIED, true);
+        String selection = Alerts.ALERT_ID + "=" + alertId;
+        ctx.getContentResolver().update(Alerts.CONTENT_URI, values, selection, null);
+    }
+
     public static Cursor getAlerts() {
         Context ctx = BasicApplication.getContext();
         return ctx.getContentResolver().query(Alerts.CONTENT_URI, AlertsQuery.PROJECTION,

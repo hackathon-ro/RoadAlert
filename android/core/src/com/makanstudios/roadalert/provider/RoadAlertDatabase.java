@@ -13,7 +13,7 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "roadalert.db";
 
-    private static final int VERSION_LAUNCH = 1;
+    private static final int VERSION_LAUNCH = 2;
 
     private static final int DATABASE_VERSION = VERSION_LAUNCH;
 
@@ -34,6 +34,7 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
                 + AlertColumns.LAT + " INTEGER NOT NULL DEFAULT 0,"
                 + AlertColumns.LON + " INTEGER NOT NULL DEFAULT 0,"
                 + AlertColumns.TIMESTAMP + " INTEGER NOT NULL DEFAULT 0,"
+                + AlertColumns.NOTIFIED + " BOOLEAN,"
                 + "UNIQUE (" + AlertColumns.ALERT_ID + ") ON CONFLICT REPLACE"
                 + ")");
     }

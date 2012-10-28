@@ -19,6 +19,8 @@ public class RoadAlertContract {
         String LON = "lon";
 
         String TIMESTAMP = "timestamp";
+
+        String NOTIFIED = "notified";
     }
 
     static final String PATH_ALERTS = "alerts";
