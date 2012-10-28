@@ -29,4 +29,8 @@ public interface CustomConstants {
     String API_PASSWORD = "Police";
 
     int TRIGGER_SYNC_MAX_JITTER_MILLIS = 3 * 1000; // 3 seconds
+    
+    int LOCATION_FREQUENCY = ;
+    
+    int LOCATION_MAX_AGE = ;
 }
