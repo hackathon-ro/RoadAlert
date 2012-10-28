@@ -59,8 +59,6 @@ public class RoadAlertApplication extends BasicApplication {
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
         }
 
-        // FIXME: Do we save these here or later?
-        GlobalUtils.saveFirstTime(false);
         GlobalUtils.saveVersionCode(MiscUtils.getCurrentVersionCode());
     }
 }

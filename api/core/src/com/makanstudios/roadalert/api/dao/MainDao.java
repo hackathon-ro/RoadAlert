@@ -25,10 +25,17 @@ public enum MainDao {
 	}
 
 	/* Alert */
+	/*
+	 * @SuppressWarnings("unchecked") public List<Alert> getAlerts() { Query
+	 * query = em.createQuery("SELECT c FROM Alert c"); List<Alert> alerts =
+	 * (List<Alert>) query.getResultList(); return alerts; }
+	 */
 
 	@SuppressWarnings("unchecked")
-	public List<Alert> getAlerts() {
-		Query query = em.createQuery("SELECT c FROM Alert c");
+	public List<Alert> getAlerts(long timestamp) {
+		Query query = em
+				.createQuery("SELECT c FROM Alert c WHERE c.timestamp >= :timestamp");
+		query.setParameter("timestamp", timestamp);
 		List<Alert> alerts = (List<Alert>) query.getResultList();
 		return alerts;
 	}
