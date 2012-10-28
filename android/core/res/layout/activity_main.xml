@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.cyrilmottier.polaris.PolarisMapView
-        android:id="@+id/polaris_map_view"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:apiKey="@string/map_api_key_release" />
+        android:layout_weight="1" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+
+        <com.cyrilmottier.polaris.PolarisMapView
+            android:id="@+id/polaris_map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:apiKey="@string/map_api_key_debug" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/alert"

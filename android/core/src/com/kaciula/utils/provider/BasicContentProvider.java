@@ -107,7 +107,7 @@ public abstract class BasicContentProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         LogUtils.d(TAG, "update(uri=" + uri + ", values=" + values.toString() + ")");
 
-        final SQLiteDatabase db = mHelper.getReadableDatabase();
+        final SQLiteDatabase db = mHelper.getWritableDatabase();
         final int match = mUriMatcher.match(uri);
         boolean syncToNetwork = UriHandler.hasSyncAdapterParameter(uri);
         final SelectionBuilder builder = buildSimpleSelection(uri, match);

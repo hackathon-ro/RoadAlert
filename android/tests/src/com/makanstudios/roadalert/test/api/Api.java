@@ -48,7 +48,7 @@ public class Api extends AndroidTestCase {
 
     public void testAddAlert() {
         try {
-            Alert[] alerts = NetService.getInstance().getAlerts();
+            Alert[] alerts = NetService.getInstance().getAlerts(0);
             assertNotNull(alerts);
             assertEquals(0, alerts.length);
 
@@ -56,7 +56,7 @@ public class Api extends AndroidTestCase {
                 createAlert(alertData[i][0], alertData[i][1], alertData[i][2]);
             }
 
-            alerts = NetService.getInstance().getAlerts();
+            alerts = NetService.getInstance().getAlerts(0);
             assertNotNull(alerts);
             assertEquals(alertData.length, alerts.length);
         } catch (ServiceException se) {

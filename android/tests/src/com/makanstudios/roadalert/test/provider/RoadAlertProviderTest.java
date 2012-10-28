@@ -9,7 +9,9 @@ import android.test.ProviderTestCase2;
 import android.test.mock.MockContentResolver;
 
 import com.kaciula.utils.misc.LogUtils;
+import com.kaciula.utils.provider.UriHandler;
 import com.makanstudios.roadalert.model.Alert;
+import com.makanstudios.roadalert.net.DatabaseHandler;
 import com.makanstudios.roadalert.provider.AlertsQuery;
 import com.makanstudios.roadalert.provider.RoadAlertContract;
 import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
@@ -90,6 +92,19 @@ public class RoadAlertProviderTest extends ProviderTestCase2<RoadAlertProvider> 
         assertTrue(cursor.moveToFirst());
         assertEquals(newLat, cursor.getLong(AlertsQuery.LAT));
         assertEquals(newLon, cursor.getLong(AlertsQuery.LON));
+        assertEquals(false, cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false);
+        cursor.close();
+
+        DatabaseHandler.updateAlertNotified(Long.parseLong(UriHandler.getId(newUri)));
+
+        cursor = resolver.query(uri, AlertsQuery.PROJECTION, null,
+                null, null);
+        assertNotNull(cursor);
+        assertEquals(1, cursor.getCount());
+        assertTrue(cursor.moveToFirst());
+        assertEquals(newLat, cursor.getLong(AlertsQuery.LAT));
+        assertEquals(newLon, cursor.getLong(AlertsQuery.LON));
+        assertEquals(true, cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false);
         cursor.close();
     }
 
@@ -99,6 +114,7 @@ public class RoadAlertProviderTest extends ProviderTestCase2<RoadAlertProvider> 
         values.put(Alerts.LAT, alert.lat);
         values.put(Alerts.LON, alert.lon);
         values.put(Alerts.TIMESTAMP, alert.timestamp);
+        values.put(Alerts.DEVICE_ID, alert.deviceId);
 
         Uri uri = resolver.insert(Alerts.CONTENT_URI, values);
         return uri;

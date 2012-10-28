@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.RemoteException;
 
 import com.kaciula.utils.misc.LogUtils;
+import com.kaciula.utils.provider.UriHandler;
 import com.kaciula.utils.ui.BasicApplication;
 import com.makanstudios.roadalert.model.Alert;
 import com.makanstudios.roadalert.provider.AlertsQuery;
@@ -53,8 +54,8 @@ public class DatabaseHandler {
         Context ctx = BasicApplication.getContext();
         ContentValues values = new ContentValues();
         values.put(Alerts.NOTIFIED, true);
-        String selection = Alerts.ALERT_ID + "=" + alertId;
-        ctx.getContentResolver().update(Alerts.CONTENT_URI, values, selection, null);
+        ctx.getContentResolver().update(UriHandler.buildUri(Alerts.CONTENT_URI, alertId), values,
+                null, null);
     }
 
     public static Cursor getAlerts() {

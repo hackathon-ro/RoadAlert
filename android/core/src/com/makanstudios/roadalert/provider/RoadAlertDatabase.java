@@ -13,7 +13,7 @@ public class RoadAlertDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "roadalert.db";
 
-    private static final int VERSION_LAUNCH = 3;
+    private static final int VERSION_LAUNCH = 4;
 
     private static final int DATABASE_VERSION = VERSION_LAUNCH;
 
