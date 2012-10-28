@@ -17,7 +17,7 @@ public class TriggerSyncReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LogUtils.d("Trigger sync");
 
-        // TODO: get wake lock
+        // LATER: get wake lock
         Intent newIntent = new Intent(context, UpdateRoadAlertService.class);
         context.startService(newIntent);
     }
