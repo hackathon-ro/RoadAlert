@@ -19,6 +19,7 @@ public class LocationBroadcastReceiver extends BroadcastReceiver {
         final LocationInfo locationInfo = (LocationInfo) intent
                 .getSerializableExtra(LocationLibraryConstants.LOCATION_BROADCAST_EXTRA_LOCATIONINFO);
 
-        RoadAlertApplication.currentLocation = locationInfo;
+        RoadAlertApplication.currentLocationData.setCurrentLocation(locationInfo);
+        NotificationUtils.showNotification();
     }
 }

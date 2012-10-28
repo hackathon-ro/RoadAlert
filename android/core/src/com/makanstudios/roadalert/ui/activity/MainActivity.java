@@ -38,6 +38,7 @@ import com.makanstudios.roadalert.provider.AlertsQuery;
 import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
 import com.makanstudios.roadalert.ui.misc.RoadAlertApplication;
 import com.makanstudios.roadalert.utils.Config;
+import com.makanstudios.roadalert.utils.NotificationUtils;
 
 public class MainActivity extends MapActivity implements OnRegionChangedListener,
         OnAnnotationSelectionChangedListener, OnClickListener, LoaderCallbacks<Cursor> {
@@ -241,9 +242,9 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
 
     private void updateCurrentLocation() {
         LogUtils.d("HELLOO", "update current location");
-        LocationInfo info = RoadAlertApplication.currentLocation;
+        LocationInfo info = RoadAlertApplication.currentLocationData.currentLocationInfo;
         if (info == null)
-            info = new LocationInfo(this);
+            return;
 
         GeoPoint point = new GeoPoint((int) (info.lastLat * 1E6),
                 (int) (info.lastLong * 1E6));
@@ -261,7 +262,8 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
             // extract the location info in the broadcast
             final LocationInfo locationInfo = (LocationInfo) intent
                     .getSerializableExtra(LocationLibraryConstants.LOCATION_BROADCAST_EXTRA_LOCATIONINFO);
-            RoadAlertApplication.currentLocation = locationInfo;
+            RoadAlertApplication.currentLocationData.setCurrentLocation(locationInfo);
+            NotificationUtils.showNotification();
             updateCurrentLocation();
         }
     };
