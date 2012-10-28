@@ -3,7 +3,10 @@ package com.makanstudios.roadalert.ui.activity;
 
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -25,11 +28,15 @@ import com.cyrilmottier.polaris.PolarisMapView.OnRegionChangedListener;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.kaciula.utils.misc.LogUtils;
+import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
+import com.littlefluffytoys.littlefluffylocationlibrary.LocationLibrary;
+import com.littlefluffytoys.littlefluffylocationlibrary.LocationLibraryConstants;
 import com.makanstudios.roadalert.R;
 import com.makanstudios.roadalert.net.DatabaseHandler;
 import com.makanstudios.roadalert.net.SendRoadAlertService;
 import com.makanstudios.roadalert.provider.AlertsQuery;
 import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
+import com.makanstudios.roadalert.ui.misc.RoadAlertApplication;
 import com.makanstudios.roadalert.utils.Config;
 
 public class MainActivity extends MapActivity implements OnRegionChangedListener,
@@ -75,6 +82,7 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         observer = new AlertsContentObserver(new Handler());
 
         updateViews();
+        updateCurrentLocation();
     }
 
     @Override
@@ -89,6 +97,12 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         super.onStart();
         mMapView.onStart();
         getContentResolver().registerContentObserver(Alerts.CONTENT_URI, true, observer);
+
+        final IntentFilter lftIntentFilter = new IntentFilter(
+                LocationLibraryConstants.getLocationChangedPeriodicBroadcastAction());
+        registerReceiver(lftBroadcastReceiver, lftIntentFilter);
+
+        LocationLibrary.forceLocationUpdate(this);
     }
 
     @Override
@@ -96,6 +110,8 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         super.onStop();
         mMapView.onStop();
         getContentResolver().unregisterContentObserver(observer);
+
+        unregisterReceiver(lftBroadcastReceiver);
     }
 
     @Override
@@ -222,4 +238,31 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
             mMapView.getController().setZoom(16);
         }
     }
+
+    private void updateCurrentLocation() {
+        LogUtils.d("HELLOO", "update current location");
+        LocationInfo info = RoadAlertApplication.currentLocation;
+        if (info == null)
+            info = new LocationInfo(this);
+
+        GeoPoint point = new GeoPoint((int) (info.lastLat * 1E6),
+                (int) (info.lastLong * 1E6));
+        LogUtils.d("HELLOOO", "update current location " + point.getLatitudeE6() + " "
+                + point.getLongitudeE6());
+        mMapView.getController().setCenter(point);
+        mMapView.invalidate();
+    }
+
+    private final BroadcastReceiver lftBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            LogUtils.d("Received location update");
+            // extract the location info in the broadcast
+            final LocationInfo locationInfo = (LocationInfo) intent
+                    .getSerializableExtra(LocationLibraryConstants.LOCATION_BROADCAST_EXTRA_LOCATIONINFO);
+            RoadAlertApplication.currentLocation = locationInfo;
+            updateCurrentLocation();
+        }
+    };
 }
