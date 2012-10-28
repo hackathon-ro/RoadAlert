@@ -4,8 +4,13 @@ package com.makanstudios.roadalert.ui.activity;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,18 +19,21 @@ import android.widget.Toast;
 
 import com.cyrilmottier.polaris.Annotation;
 import com.cyrilmottier.polaris.MapCalloutView;
-import com.cyrilmottier.polaris.MapViewUtils;
 import com.cyrilmottier.polaris.PolarisMapView;
 import com.cyrilmottier.polaris.PolarisMapView.OnAnnotationSelectionChangedListener;
 import com.cyrilmottier.polaris.PolarisMapView.OnRegionChangedListener;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
+import com.kaciula.utils.misc.LogUtils;
 import com.makanstudios.roadalert.R;
+import com.makanstudios.roadalert.net.DatabaseHandler;
 import com.makanstudios.roadalert.net.SendRoadAlertService;
+import com.makanstudios.roadalert.provider.AlertsQuery;
+import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
 import com.makanstudios.roadalert.utils.Config;
 
 public class MainActivity extends MapActivity implements OnRegionChangedListener,
-        OnAnnotationSelectionChangedListener, OnClickListener {
+        OnAnnotationSelectionChangedListener, OnClickListener, LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = "MainActivity";
 
@@ -42,47 +50,13 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
                     "A commune in the Orne department in north-western France"),
     };
 
-    private static final Annotation[] sEurope = {
-            new Annotation(new GeoPoint(55755800, 37617600), "Moscow"),
-            new Annotation(new GeoPoint(59332800, 18064500), "Stockholm"),
-            new Annotation(new GeoPoint(59939000, 30315800), "Saint Petersburg"),
-            new Annotation(new GeoPoint(60169800, 24938200), "Helsinki"),
-            new Annotation(new GeoPoint(60451400, 22268700), "Turku"),
-            new Annotation(new GeoPoint(65584200, 22154700), "Lule\u00E5"),
-            new Annotation(new GeoPoint(59438900, 24754500), "Talinn"),
-            new Annotation(new GeoPoint(66498700, 25721100), "Rovaniemi"),
-    };
-
-    private static final Annotation[] sUsaWestCoast = {
-            new Annotation(new GeoPoint(40714400, -74006000), "New York City"),
-            new Annotation(new GeoPoint(39952300, -75163800), "Philadelphia"),
-            new Annotation(new GeoPoint(38895100, -77036400), "Washington"),
-            new Annotation(new GeoPoint(41374800, -83651300), "Bowling Green"),
-            new Annotation(new GeoPoint(42331400, -83045800), "Detroit"),
-    };
-
-    private static final Annotation[] sUsaEastCoast = {
-            new Annotation(new GeoPoint(37774900, -122419400), "San Francisco"),
-            new Annotation(new GeoPoint(37770600, -119510800), "Yosemite National Park"),
-            new Annotation(new GeoPoint(36878200, -121947300), "Monteray Bay"),
-            new Annotation(new GeoPoint(35365800, -120849900), "Morro Bay"),
-            new Annotation(new GeoPoint(34420800, -119698200), "Santa Barbara"),
-            new Annotation(new GeoPoint(34052200, -118243700), "Los Angeles"),
-            new Annotation(new GeoPoint(32715300, -117157300), "San Diego"),
-            new Annotation(new GeoPoint(36114600, -115172800), "Las Vegas"),
-            new Annotation(new GeoPoint(36220100, -116881700), "Death Valley"),
-            new Annotation(new GeoPoint(36355200, -112661200), "Grand Canyon"),
-            new Annotation(new GeoPoint(37289900, -113048900), "Zion National Park"),
-            new Annotation(new GeoPoint(37628300, -112167700), "Bryce Canyon"),
-            new Annotation(new GeoPoint(36936900, -111483800), "Lake Powell"),
-    };
-
-    private static final Annotation[][] sRegions = {
-            sFrance, sEurope, sUsaEastCoast, sUsaWestCoast
-    };
-    // @formatter:on
-
     private PolarisMapView mMapView;
+
+    private static final int LOADER_ID_DATA = 1;
+
+    private Cursor mCursor;
+
+    private AlertsContentObserver observer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,34 +71,31 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         mMapView.setOnRegionChangedListenerListener(this);
         mMapView.setOnAnnotationSelectionChangedListener(this);
 
-        // Prepare an alternate pin Drawable
-        final Drawable altMarker = MapViewUtils.boundMarkerCenterBottom(getResources().getDrawable(
-                R.drawable.map_pin_holed_violet));
+        mCursor = DatabaseHandler.getAlerts();
+        observer = new AlertsContentObserver(new Handler());
 
-        // Prepare the list of Annotation using the alternate Drawable for all
-        // Annotation located in France
-        final ArrayList<Annotation> annotations = new ArrayList<Annotation>();
-        for (Annotation[] region : sRegions) {
-            for (Annotation annotation : region) {
-                if (region == sFrance) {
-                    annotation.setMarker(altMarker);
-                }
-                annotations.add(annotation);
-            }
-        }
-        mMapView.setAnnotations(annotations, R.drawable.map_pin_holed_blue);
+        updateViews();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mCursor != null)
+            mCursor.close();
+        super.onDestroy();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mMapView.onStart();
+        getContentResolver().registerContentObserver(Alerts.CONTENT_URI, true, observer);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         mMapView.onStop();
+        getContentResolver().unregisterContentObserver(observer);
     }
 
     @Override
@@ -186,4 +157,69 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         startService(intent);
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle arg1) {
+        CursorLoader loader = null;
+
+        switch (id) {
+            case LOADER_ID_DATA:
+                // TODO: Get only latest alerts on map
+                String selection = Alerts.TIMESTAMP + ">=" + "0";
+                loader = new CursorLoader(this, Alerts.CONTENT_URI,
+                        AlertsQuery.PROJECTION, selection, null, null);
+                break;
+        }
+
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        mCursor = cursor;
+        updateViews();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> arg0) {
+        mCursor = null;
+    }
+
+    private class AlertsContentObserver extends ContentObserver {
+
+        public AlertsContentObserver(Handler handler) {
+            super(handler);
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            LogUtils.d("on CHAnge");
+            if (mCursor != null)
+                mCursor.requery();
+            updateViews();
+        }
+    }
+
+    private void updateViews() {
+        if (mCursor != null) {
+            final ArrayList<Annotation> annotations = new ArrayList<Annotation>();
+
+            while (mCursor.moveToNext()) {
+                int alertId = (int) mCursor.getLong(AlertsQuery.ALERT_ID);
+                int lat = (int) mCursor.getLong(AlertsQuery.LAT);
+                int lon = (int) mCursor.getLong(AlertsQuery.LON);
+                annotations.add(new Annotation(new GeoPoint(lat, lon), "Alert " + alertId));
+
+                LogUtils.d("id: " + alertId);
+                LogUtils.d("lat: " + lat);
+                LogUtils.d("lon: " + lon);
+                LogUtils.d("timestamp: " + mCursor.getLong(AlertsQuery.TIMESTAMP));
+                LogUtils.d("-----");
+            }
+
+            mMapView.setAnnotations(annotations, R.drawable.map_pin_holed_blue);
+            mMapView.getController().setZoom(16);
+        }
+    }
 }
