@@ -33,8 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_selector"
-            android:text="Road Alert!" />
+            android:text="Road Alert!"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large" />
     </RelativeLayout>
 
 </LinearLayout>
