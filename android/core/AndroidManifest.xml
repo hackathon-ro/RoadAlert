@@ -53,8 +53,10 @@
         android:theme="@style/Theme.RoadAlert" >
         <activity
             android:name=".ui.activity.DelegateActivity"
+            android:configChanges="orientation|screenLayout|screenSize|keyboard|keyboardHidden"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,7 +65,9 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/app_name" />
+            android:configChanges="orientation|screenLayout|screenSize|keyboard|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
 
         <!--
           BroadcastReceiver that will receive intents from GCM

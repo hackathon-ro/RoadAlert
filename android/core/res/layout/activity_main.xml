@@ -5,28 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
 
         <com.cyrilmottier.polaris.PolarisMapView
             android:id="@+id/polaris_map_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:apiKey="@string/map_api_key_debug" />
-    </FrameLayout>
 
-    <Button
-        android:id="@+id/alert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_selector"
-        android:text="Road Alert!" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/top_hublou" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bottom_hublou" />
+
+        <Button
+            android:id="@+id/alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_selector"
+            android:text="Road Alert!" />
+    </RelativeLayout>
 
 </LinearLayout>

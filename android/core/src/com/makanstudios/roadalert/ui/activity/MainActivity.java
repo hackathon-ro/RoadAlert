@@ -59,6 +59,7 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         mMapView.setUserTrackingButtonEnabled(true);
         mMapView.setOnRegionChangedListenerListener(this);
         mMapView.setOnAnnotationSelectionChangedListener(this);
+        mMapView.setBuiltInZoomControls(false);
 
         mMapView.getController().setZoom(14);
 

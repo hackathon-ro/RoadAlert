@@ -38,6 +38,8 @@ public class NotificationUtils {
                     boolean notified = cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false;
                     String deviceId = cursor.getString(AlertsQuery.DEVICE_ID);
 
+                    LogUtils.d("alet id = " + alertId);
+
                     if (notified) {
                         LogUtils.d("already notified");
                         continue;
