@@ -41,7 +41,7 @@ public class RegisterServlet extends BaseServlet {
 			throws ServletException {
 		String regId = getParameter(req, PARAMETER_REG_ID);
 		Gcm gcm = new Gcm(regId);
-		System.out.println("Register gcm device");
+		System.out.println("Register gcm device work!");
 		MainDao.instance.registerGcmDevice(gcm);
 		setSuccess(resp);
 	}

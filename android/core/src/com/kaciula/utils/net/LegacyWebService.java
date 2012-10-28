@@ -117,8 +117,13 @@ public class LegacyWebService implements IWebService {
             // body = httpClient.execute(httpGet, response);
             HttpResponse response = httpClient.execute(httpGet);
             int responseCode = response.getStatusLine().getStatusCode();
-            if (responseCode != HttpStatus.SC_OK)
-                throw new ServiceException(responseCode);
+            if (responseCode != HttpStatus.SC_OK) {
+                if (responseCode > 200 && responseCode < 300) {
+                    // Do nothing. It's ok
+                    return null;
+                } else
+                    throw new ServiceException(responseCode);
+            }
 
             body = StreamUtils.readString(response.getEntity().getContent(),
                     MiscConstants.ENCODING_UTF8);

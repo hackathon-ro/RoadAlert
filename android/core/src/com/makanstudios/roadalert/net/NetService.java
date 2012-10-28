@@ -56,10 +56,14 @@ public class NetService {
         return instance;
     }
 
-    public Alert[] getAlerts() throws ServiceException {
+    public Alert[] getAlerts(long latest) throws ServiceException {
+        Map<String, String> params = null;
+        params = new HashMap<String, String>();
+        params.put("timestamp", "" + latest);
+
         Map<String, String> headers = getHeaders();
         try {
-            String body = service.get(URL_API_ALERTS, headers, null);
+            String body = service.get(URL_API_ALERTS, headers, params);
             if (!TextUtils.isEmpty(body)) {
                 Alert[] alerts = mapper.readValue(body, Alert[].class);
                 return alerts;
@@ -114,7 +118,7 @@ public class NetService {
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             LogUtils.d(TAG, "Attempt #" + i + " to register");
             try {
-                service.post(URL_GCM_REGISTER, headers, params);
+                service.get(URL_GCM_REGISTER, headers, params);
                 GCMRegistrar.setRegisteredOnServer(BasicApplication.getContext(), true);
                 return true;
             } catch (ServiceException se) {
@@ -156,7 +160,7 @@ public class NetService {
         Map<String, String> headers = getHeaders();
 
         try {
-            service.post(URL_GCM_UNREGISTER, headers, params);
+            service.get(URL_GCM_UNREGISTER, headers, params);
             GCMRegistrar.setRegisteredOnServer(BasicApplication.getContext(), false);
         } catch (ServiceException se) {
             LogUtils.printStackTrace(se);

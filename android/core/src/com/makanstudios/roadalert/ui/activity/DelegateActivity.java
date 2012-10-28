@@ -9,9 +9,11 @@ import android.os.Bundle;
 import com.google.android.gcm.GCMRegistrar;
 import com.kaciula.utils.misc.LogUtils;
 import com.makanstudios.roadalert.net.NetService;
+import com.makanstudios.roadalert.net.UpdateRoadAlertService;
 import com.makanstudios.roadalert.ui.misc.RoadAlertActivity;
 import com.makanstudios.roadalert.utils.AppParams;
 import com.makanstudios.roadalert.utils.CustomConstants;
+import com.makanstudios.roadalert.utils.GlobalUtils;
 
 public class DelegateActivity extends RoadAlertActivity {
 
@@ -28,6 +30,8 @@ public class DelegateActivity extends RoadAlertActivity {
 
         doInitStuff();
 
+        // GlobalUtils.saveFirstTime(false);
+
         startActivity(new Intent(this, MainActivity.class));
     }
 
@@ -40,6 +44,11 @@ public class DelegateActivity extends RoadAlertActivity {
     private void doInitStuff() {
         if (AppParams.hasGcmSupport)
             registerGcm();
+
+        if (GlobalUtils.isFirstTime()) {
+            Intent intent = new Intent(this, UpdateRoadAlertService.class);
+            startService(intent);
+        }
     }
 
     private void cleanInitStuff() {

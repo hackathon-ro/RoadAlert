@@ -1,6 +1,9 @@
 
 package com.makanstudios.roadalert.utils;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +13,20 @@ import com.kaciula.utils.ui.BasicApplication;
 
 @SuppressLint("CommitPrefEdits")
 public class GlobalUtils {
+
+    public static long getLatestSync() {
+        SharedPreferences prefs = BasicApplication.getContext().getSharedPreferences(Prefs.GLOBAL,
+                Context.MODE_PRIVATE);
+        return prefs.getLong(Prefs.LATEST_SYNC, Constants.TIMESTAMP_ALL);
+    }
+
+    public static void saveLatestSync() {
+        SharedPreferences prefs = BasicApplication.getContext().getSharedPreferences(Prefs.GLOBAL,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(Prefs.LATEST_SYNC, new DateTime(DateTimeZone.UTC).getMillis());
+        PlatformSpecificFactory.getSharedPreferenceSaver().savePreferences(editor);
+    }
 
     public static boolean isFirstTime() {
         SharedPreferences prefs = BasicApplication.getContext().getSharedPreferences(Prefs.GLOBAL,
@@ -46,5 +63,7 @@ public class GlobalUtils {
         String IS_FIRST_TIME = "is_first_time";
 
         String PREVIOUS_VERSION_CODE = "previous_version_code";
+
+        String LATEST_SYNC = "latest_sync";
     }
 }

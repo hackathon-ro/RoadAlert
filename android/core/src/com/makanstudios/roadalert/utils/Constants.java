@@ -12,4 +12,6 @@ public interface Constants {
     int TYPEFACE_ROBOTO_CONDENSED = 3;
 
     int TYPEFACE_DEFAULT = Constants.TYPEFACE_ROBOTO_REGULAR;
+
+    int TIMESTAMP_ALL = 0;
 }

@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
@@ -19,6 +20,7 @@ import com.google.android.gcm.server.Message;
 import com.makanstudios.roadalert.api.dao.MainDao;
 import com.makanstudios.roadalert.api.gcm.GcmUtils;
 import com.makanstudios.roadalert.api.model.Alert;
+import com.makanstudios.roadalert.api.utils.Constants;
 import com.makanstudios.roadalert.api.utils.CustomConstants;
 
 @Path("/alerts")
@@ -33,13 +35,23 @@ public class AlertsResource {
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public List<Alert> getAlertsBrowser() {
-		return getAlerts();
+		return MainDao.instance.getAlerts(Constants.TIMESTAMP_ALL);
 	}
 
 	@GET
 	@Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public List<Alert> getAlerts() {
-		return MainDao.instance.getAlerts();
+	public List<Alert> getAlerts(@QueryParam("timestamp")
+	String latest) {
+		long timestamp = Constants.TIMESTAMP_ALL;
+		try {
+			if (latest != null)
+				timestamp = Long.parseLong(latest);
+		} catch (Exception e) {
+		}
+
+		System.out.print("timestamp: " + timestamp);
+
+		return MainDao.instance.getAlerts(timestamp);
 	}
 
 	@POST
