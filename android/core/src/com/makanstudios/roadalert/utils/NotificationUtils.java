@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.kaciula.utils.misc.LogUtils;
@@ -73,7 +74,8 @@ public class NotificationUtils {
         nb.setContentText(ctx.getString(R.string.alert_ahead));
 
         nb.setSmallIcon(R.drawable.ic_launcher);
-        nb.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS);
+        nb.setDefaults(Notification.DEFAULT_LIGHTS);
+        nb.setSound(Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.road_alert));
         nb.setAutoCancel(true);
         nb.setWhen(new DateTime().getMillis());
 
