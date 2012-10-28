@@ -5,6 +5,7 @@ import android.location.Location;
 
 import com.kaciula.utils.ui.BasicApplication;
 import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
+import com.makanstudios.roadalert.utils.CustomConstants;
 
 public class LocationData {
 
@@ -22,7 +23,7 @@ public class LocationData {
     }
 
     public int getNotificationRadius() {
-        return Math.max(5 * 1000, (int) avgSpeed / 6);
+        return Math.max(CustomConstants.NOTIF_MIN_MAX_DISTANCE, (int) avgSpeed / 6);
     }
 
     public void setCurrentLocation(LocationInfo l) {

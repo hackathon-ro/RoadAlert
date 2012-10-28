@@ -75,7 +75,8 @@ public class NotificationUtils {
 
         nb.setSmallIcon(R.drawable.ic_launcher);
         nb.setDefaults(Notification.DEFAULT_LIGHTS);
-        nb.setSound(Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.road_alert));
+        nb.setSound(Uri.parse("android.resource://" + ctx.getPackageName() + "/"
+                + R.raw.road_alert_loud));
         nb.setAutoCancel(true);
         nb.setWhen(new DateTime().getMillis());
 

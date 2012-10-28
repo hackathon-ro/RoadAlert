@@ -44,4 +44,6 @@ public interface CustomConstants {
     float LAT_RO = 46.24825f;
 
     float LON_RO = 24.905182f;
+
+    int NOTIF_MIN_MAX_DISTANCE = 6 * 1000; // 6 km
 }
