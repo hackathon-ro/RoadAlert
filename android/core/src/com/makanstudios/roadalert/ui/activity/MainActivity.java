@@ -192,7 +192,7 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
             }
 
             mMapView.setAnnotations(annotations, R.drawable.map_pin_holed_blue);
-
+            mMapView.invalidate();
         }
     }
 

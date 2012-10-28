@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 
 import com.kaciula.utils.misc.LogUtils;
 import com.kaciula.utils.ui.BasicApplication;
@@ -35,9 +36,15 @@ public class NotificationUtils {
                     int lon = (int) cursor.getLong(AlertsQuery.LON);
                     long timestamp = cursor.getLong(AlertsQuery.TIMESTAMP);
                     boolean notified = cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false;
+                    String deviceId = cursor.getString(AlertsQuery.DEVICE_ID);
 
                     if (notified) {
                         LogUtils.d("already notified");
+                        continue;
+                    }
+
+                    if (!TextUtils.isEmpty(deviceId) && deviceId.equals(GlobalUtils.getDeviceId())) {
+                        LogUtils.d("Owner of the alert");
                         continue;
                     }
 
