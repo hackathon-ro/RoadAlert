@@ -43,8 +43,6 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
 
     private PolarisMapView mMapView;
 
-    private static final int LOADER_ID_DATA = 1;
-
     private Cursor mCursor;
 
     private AlertsContentObserver observer;
