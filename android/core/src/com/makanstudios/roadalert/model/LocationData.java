@@ -1,13 +1,10 @@
 
 package com.makanstudios.roadalert.model;
 
-import org.joda.time.DateTime;
-
 import android.location.Location;
 
 import com.kaciula.utils.ui.BasicApplication;
 import com.littlefluffytoys.littlefluffylocationlibrary.LocationInfo;
-import com.makanstudios.roadalert.utils.CustomConstants;
 
 public class LocationData {
 
@@ -19,9 +16,9 @@ public class LocationData {
 
     public LocationData() {
         currentLocationInfo = new LocationInfo(BasicApplication.getContext());
-        currentLocationInfo.lastLat = CustomConstants.LAT_RO;
-        currentLocationInfo.lastLong = CustomConstants.LON_RO;
-        currentLocationInfo.lastLocationUpdateTimestamp = new DateTime().getMillis();
+        // currentLocationInfo.lastLat = CustomConstants.LAT_RO;
+        // currentLocationInfo.lastLong = CustomConstants.LON_RO;
+        // currentLocationInfo.lastLocationUpdateTimestamp = 0;
     }
 
     public int getNotificationRadius() {

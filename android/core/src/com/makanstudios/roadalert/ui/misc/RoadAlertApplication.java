@@ -43,6 +43,7 @@ public class RoadAlertApplication extends BasicApplication {
         LocationLibrary.showDebugOutput(BuildConfig.DEBUG);
         LocationLibrary.initialiseLibrary(getBaseContext(), CustomConstants.LOCATION_FREQUENCY,
                 CustomConstants.LOCATION_MAX_AGE, getPackageName());
+        LocationLibrary.forceLocationUpdate(this);
         currentLocationData = new LocationData();
 
         DialogUtils.setMapping(DialogConstants.mapping);

@@ -11,9 +11,6 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -41,22 +38,8 @@ import com.makanstudios.roadalert.utils.Config;
 import com.makanstudios.roadalert.utils.NotificationUtils;
 
 public class MainActivity extends MapActivity implements OnRegionChangedListener,
-        OnAnnotationSelectionChangedListener, OnClickListener, LoaderCallbacks<Cursor> {
-
+        OnAnnotationSelectionChangedListener, OnClickListener {
     private static final String LOG_TAG = "MainActivity";
-
-    // @formatter:off
-    private static final Annotation[] sFrance = {
-            new Annotation(
-                    new GeoPoint(48635600, -1510600),
-                    "Mont Saint Michel",
-                    "Mont Saint-Michel is a rocky tidal island and a commune in Normandy, France. It is located approximately one kilometre (just over half a mile) off the country's north-western coast, at the mouth of the Couesnon River near Avranches."),
-            new Annotation(new GeoPoint(48856600, 2351000), "Paris", "The city of love"),
-            new Annotation(new GeoPoint(44837400, -576100), "Bordeaux",
-                    "A port city in southwestern France"),
-            new Annotation(new GeoPoint(48593100, -647500), "Domfront",
-                    "A commune in the Orne department in north-western France"),
-    };
 
     private PolarisMapView mMapView;
 
@@ -79,10 +62,11 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         mMapView.setOnRegionChangedListenerListener(this);
         mMapView.setOnAnnotationSelectionChangedListener(this);
 
+        mMapView.getController().setZoom(14);
+
         mCursor = DatabaseHandler.getAlerts();
         observer = new AlertsContentObserver(new Handler());
 
-        updateViews();
         updateCurrentLocation();
     }
 
@@ -104,6 +88,7 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         registerReceiver(lftBroadcastReceiver, lftIntentFilter);
 
         LocationLibrary.forceLocationUpdate(this);
+        updateViews();
     }
 
     @Override
@@ -174,33 +159,6 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
         startService(intent);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle arg1) {
-        CursorLoader loader = null;
-
-        switch (id) {
-            case LOADER_ID_DATA:
-                // TODO: Get only latest alerts on map
-                String selection = Alerts.TIMESTAMP + ">=" + "0";
-                loader = new CursorLoader(this, Alerts.CONTENT_URI,
-                        AlertsQuery.PROJECTION, selection, null, null);
-                break;
-        }
-
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mCursor = cursor;
-        updateViews();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> arg0) {
-        mCursor = null;
-    }
-
     private class AlertsContentObserver extends ContentObserver {
 
         public AlertsContentObserver(Handler handler) {
@@ -236,7 +194,7 @@ public class MainActivity extends MapActivity implements OnRegionChangedListener
             }
 
             mMapView.setAnnotations(annotations, R.drawable.map_pin_holed_blue);
-            mMapView.getController().setZoom(16);
+
         }
     }
 
