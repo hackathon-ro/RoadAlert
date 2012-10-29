@@ -35,10 +35,10 @@ public class NotificationUtils {
                     int lat = (int) cursor.getLong(AlertsQuery.LAT);
                     int lon = (int) cursor.getLong(AlertsQuery.LON);
                     long timestamp = cursor.getLong(AlertsQuery.TIMESTAMP);
-                    boolean notified = cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false;
+                    boolean notified = cursor.getInt(AlertsQuery.NOTIFIED) == 0 ? false : true;
                     String deviceId = cursor.getString(AlertsQuery.DEVICE_ID);
 
-                    LogUtils.d("alet id = " + alertId);
+                    LogUtils.d("alert id = " + alertId);
 
                     if (notified) {
                         LogUtils.d("already notified");

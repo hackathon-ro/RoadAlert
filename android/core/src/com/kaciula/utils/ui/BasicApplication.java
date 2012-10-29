@@ -29,8 +29,8 @@ public abstract class BasicApplication extends Application {
         BasicApplication.context = getApplicationContext();
 
         /*
-         * When in developer mode, we use StrictMode (if available) to detect accidental 
-         * disk/network access on the application's main thread 
+         * When in developer mode, we use StrictMode (if available) to detect
+         * accidental disk/network access on the application's main thread
          */
         if (Config.USE_STRICT_MODE) {
             IStrictMode strictMode = PlatformSpecificFactory.getStrictMode();

@@ -35,19 +35,4 @@ public class RoadAlertContract {
 
         public static final String DEFAULT_SORT_ORDER = BaseColumns._ID + " ASC";
     }
-
-    public static class UriHandler {
-
-        public static Uri buildUri(Uri contentUri, long id) {
-            return contentUri.buildUpon().appendPath("" + id).build();
-        }
-
-        public static Uri buildUri(Uri contentUri, String id) {
-            return contentUri.buildUpon().appendPath(id).build();
-        }
-
-        public static String getId(Uri uri) {
-            return uri.getPathSegments().get(1);
-        }
-    }
 }

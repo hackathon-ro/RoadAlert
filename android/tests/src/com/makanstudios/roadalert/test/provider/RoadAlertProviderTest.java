@@ -9,9 +9,7 @@ import android.test.ProviderTestCase2;
 import android.test.mock.MockContentResolver;
 
 import com.kaciula.utils.misc.LogUtils;
-import com.kaciula.utils.provider.UriHandler;
 import com.makanstudios.roadalert.model.Alert;
-import com.makanstudios.roadalert.net.DatabaseHandler;
 import com.makanstudios.roadalert.provider.AlertsQuery;
 import com.makanstudios.roadalert.provider.RoadAlertContract;
 import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
@@ -19,6 +17,7 @@ import com.makanstudios.roadalert.provider.RoadAlertProvider;
 
 public class RoadAlertProviderTest extends ProviderTestCase2<RoadAlertProvider> {
 
+    @SuppressWarnings("unused")
     private static final String TAG = LogUtils.makeLogTag(RoadAlertProviderTest.class
             .getSimpleName());
 
@@ -92,10 +91,13 @@ public class RoadAlertProviderTest extends ProviderTestCase2<RoadAlertProvider> 
         assertTrue(cursor.moveToFirst());
         assertEquals(newLat, cursor.getLong(AlertsQuery.LAT));
         assertEquals(newLon, cursor.getLong(AlertsQuery.LON));
-        assertEquals(false, cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false);
+        assertEquals(false, cursor.getInt(AlertsQuery.NOTIFIED) == 0 ? false : true);
         cursor.close();
 
-        DatabaseHandler.updateAlertNotified(Long.parseLong(UriHandler.getId(newUri)));
+        ContentValues values = new ContentValues();
+        values.put(Alerts.NOTIFIED, true);
+        int no = ctx.getContentResolver().update(uri, values, null, null);
+        assertEquals(1, no);
 
         cursor = resolver.query(uri, AlertsQuery.PROJECTION, null,
                 null, null);
@@ -104,7 +106,7 @@ public class RoadAlertProviderTest extends ProviderTestCase2<RoadAlertProvider> 
         assertTrue(cursor.moveToFirst());
         assertEquals(newLat, cursor.getLong(AlertsQuery.LAT));
         assertEquals(newLon, cursor.getLong(AlertsQuery.LON));
-        assertEquals(true, cursor.getInt(AlertsQuery.NOTIFIED) == 1 ? true : false);
+        assertEquals(true, cursor.getInt(AlertsQuery.NOTIFIED) == 0 ? false : true);
         cursor.close();
     }
 

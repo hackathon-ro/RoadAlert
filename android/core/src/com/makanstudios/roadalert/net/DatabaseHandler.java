@@ -20,6 +20,9 @@ import com.makanstudios.roadalert.provider.RoadAlertContract.Alerts;
 
 public class DatabaseHandler {
 
+    @SuppressWarnings("unused")
+    private static final String TAG = LogUtils.makeLogTag(DatabaseHandler.class.getSimpleName());
+
     public static void populateAlerts(Alert[] alerts) {
         if (alerts == null || alerts.length == 0)
             return;
@@ -50,12 +53,13 @@ public class DatabaseHandler {
         ctx.getContentResolver().insert(Alerts.CONTENT_URI, values);
     }
 
-    public static void updateAlertNotified(long alertId) {
+    public static int updateAlertNotified(long alertId) {
         Context ctx = BasicApplication.getContext();
         ContentValues values = new ContentValues();
         values.put(Alerts.NOTIFIED, true);
-        ctx.getContentResolver().update(UriHandler.buildUri(Alerts.CONTENT_URI, alertId), values,
-                null, null);
+        int no = ctx.getContentResolver().update(UriHandler.buildUri(Alerts.CONTENT_URI, alertId),
+                values, null, null);
+        return no;
     }
 
     public static Cursor getAlerts() {
