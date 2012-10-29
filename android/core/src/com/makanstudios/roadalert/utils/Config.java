@@ -40,6 +40,17 @@ public class Config {
     private static final String LOCAL_CONFIG_CLASS_NAME = "com.makanstudios.roadalert.utils.LocalConfig";
     private static final String LOCAL_GOOGLE_MAPS_API_KEY_RELEASE_FIELD_NAME = "GOOGLE_MAPS_API_KEY_RELEASE";
     private static final String LOCAL_GOOGLE_MAPS_API_KEY_DEBUG_FIELD_NAME = "GOOGLE_MAPS_API_KEY_DEBUG";
+    private static final String LOCAL_DEVELOPER_SIGNATURE_DEBUG = "DEVELOPER_SIGNATURE_DEBUG";
+    private static final String LOCAL_DEVELOPER_SIGNATURE_RELEASE = "DEVELOPER_SIGNATURE_RELEASE";
+    private static final String LOCAL_API_ENDPOINT = "API_ENDPOINT";
+    private static final String LOCAL_API_PATH = "API_PATH";
+    private static final String LOCAL_GCM_SENDER_ID = "GCM_SENDER_ID";
+    private static final String LOCAL_GCM_SERVER_URL = "GCM_SERVER_URL";
+    private static final String LOCAL_GCM_NEW_NOTIFICATION_INTENT = "GCM_NEW_NOTIFICATION_INTENT";
+    private static final String LOCAL_API_KEYSTORE_TYPE = "API_KEYSTORE_TYPE";
+    private static final String LOCAL_API_KEYSTORE_PASS = "API_KEYSTORE_PASS";
+    private static final String LOCAL_API_USERNAME = "API_USERNAME";
+    private static final String LOCAL_API_PASSWORD = "API_PASSWORD";
 
     private static final Class<?> LOCAL_CONFIG_CLASS = getLocalConfig();
 
@@ -65,6 +76,21 @@ public class Config {
         } catch (Exception e) {
             Log.e(LOG_TAG, "No local configuration found with key " + name);
             return null;
+        }
+    }
+
+    /**
+     * Uses reflection in order to extract a local configuration.
+     * 
+     * @return The int associated to the given name (should be stored as a
+     *         static final variable) or the defaultValue if an error occurred.
+     */
+    private static int getLocalConfigInt(String name) {
+        try {
+            return (Integer) LOCAL_CONFIG_CLASS.getField(name).get(null);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "No local configuration found with key " + name);
+            return 0;
         }
     }
 
@@ -94,9 +120,42 @@ public class Config {
      */
     public static final String GOOGLE_MAPS_API_KEY;
 
+    public static final int DEVELOPER_SIGNATURE_DEBUG;
+
+    public static final int DEVELOPER_SIGNATURE_RELEASE;
+
+    public static final String API_ENDPOINT;
+
+    public static final String API_PATH;
+
+    public static final String GCM_SENDER_ID;
+
+    public static final String GCM_SERVER_URL;
+
+    public static final String GCM_NEW_NOTIFICATION_INTENT;
+
+    public static final String API_KEYSTORE_TYPE;
+
+    public static final String API_KEYSTORE_PASS;
+
+    public static final String API_USERNAME;
+
+    public static final String API_PASSWORD;
+
     static {
         GOOGLE_MAPS_API_KEY = (COMPILATION_TARGET == COMPILATION_TARGET_RELEASE) ? getLocalConfigString(LOCAL_GOOGLE_MAPS_API_KEY_RELEASE_FIELD_NAME)
                 : getLocalConfigString(LOCAL_GOOGLE_MAPS_API_KEY_DEBUG_FIELD_NAME);
+        DEVELOPER_SIGNATURE_DEBUG = getLocalConfigInt(LOCAL_DEVELOPER_SIGNATURE_DEBUG);
+        DEVELOPER_SIGNATURE_RELEASE = getLocalConfigInt(LOCAL_DEVELOPER_SIGNATURE_RELEASE);
+        API_ENDPOINT = getLocalConfigString(LOCAL_API_ENDPOINT);
+        API_PATH = getLocalConfigString(LOCAL_API_PATH);
+        GCM_SENDER_ID = getLocalConfigString(LOCAL_GCM_SENDER_ID);
+        GCM_SERVER_URL = getLocalConfigString(LOCAL_GCM_SERVER_URL);
+        GCM_NEW_NOTIFICATION_INTENT = getLocalConfigString(LOCAL_GCM_NEW_NOTIFICATION_INTENT);
+        API_KEYSTORE_TYPE = getLocalConfigString(LOCAL_API_KEYSTORE_TYPE);
+        API_KEYSTORE_PASS = getLocalConfigString(LOCAL_API_KEYSTORE_PASS);
+        API_USERNAME = getLocalConfigString(LOCAL_API_USERNAME);
+        API_PASSWORD = getLocalConfigString(LOCAL_API_PASSWORD);
     }
 
     // /////////////////////////////////////////////////////////////

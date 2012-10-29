@@ -12,7 +12,7 @@ import com.makanstudios.roadalert.net.NetService;
 import com.makanstudios.roadalert.net.UpdateRoadAlertService;
 import com.makanstudios.roadalert.ui.misc.RoadAlertActivity;
 import com.makanstudios.roadalert.utils.AppParams;
-import com.makanstudios.roadalert.utils.CustomConstants;
+import com.makanstudios.roadalert.utils.Config;
 import com.makanstudios.roadalert.utils.GlobalUtils;
 
 public class DelegateActivity extends RoadAlertActivity {
@@ -59,7 +59,7 @@ public class DelegateActivity extends RoadAlertActivity {
     private void registerGcm() {
         final String regId = GCMRegistrar.getRegistrationId(this);
         if (regId.equals("")) {
-            GCMRegistrar.register(this, CustomConstants.GCM_SENDER_ID);
+            GCMRegistrar.register(this, Config.GCM_SENDER_ID);
         } else {
             // Device is already registered on GCM, check server.
             if (GCMRegistrar.isRegisteredOnServer(this)) {

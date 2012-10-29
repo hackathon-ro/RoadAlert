@@ -19,7 +19,7 @@ import com.kaciula.utils.net.ServiceException;
 import com.kaciula.utils.ui.BasicApplication;
 import com.makanstudios.roadalert.R;
 import com.makanstudios.roadalert.model.Alert;
-import com.makanstudios.roadalert.utils.CustomConstants;
+import com.makanstudios.roadalert.utils.Config;
 
 public class NetService {
 
@@ -37,15 +37,16 @@ public class NetService {
 
     private static final Random random = new Random();
 
-    private static final String URL_GCM_REGISTER = CustomConstants.GCM_SERVER_URL + "/register";
+    private static final String URL_GCM_REGISTER = Config.GCM_SERVER_URL + "/register";
 
-    private static final String URL_GCM_UNREGISTER = CustomConstants.GCM_SERVER_URL + "/unregister";
+    private static final String URL_GCM_UNREGISTER = Config.GCM_SERVER_URL + "/unregister";
 
-    private static final String URL_API_ALERTS = CustomConstants.API_PATH + "/alerts";
+    private static final String URL_API_ALERTS = Config.API_PATH + "/alerts";
 
     private NetService() {
+        // FIXME: keystrore!!
         service = PlatformSpecificFactory.getWebService(R.raw.keystore_makan_studios,
-                CustomConstants.API_KEYSTORE_TYPE, CustomConstants.API_KEYSTORE_PASS, 0);
+                Config.API_KEYSTORE_TYPE, Config.API_KEYSTORE_PASS, 0);
         mapper = new ObjectMapper();
     }
 
@@ -172,7 +173,7 @@ public class NetService {
         headers.put(MiscConstants.NET_HEADER_CONTENT_TYPE,
                 MiscConstants.NET_HEADER_CONTENT_TYPE_WWW);
         String auth = Base64.encodeToString(
-                (CustomConstants.API_USERNAME + ":" + CustomConstants.API_PASSWORD).getBytes(),
+                (Config.API_USERNAME + ":" + Config.API_PASSWORD).getBytes(),
                 Base64.URL_SAFE | Base64.NO_WRAP);
         headers.put(MiscConstants.NET_HEADER_AUTHORIZATION, "Basic " + auth);
         headers.put(MiscConstants.NET_HEADER_CONTENT_TYPE,

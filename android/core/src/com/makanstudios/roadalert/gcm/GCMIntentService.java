@@ -14,6 +14,7 @@ import com.google.android.gcm.GCMRegistrar;
 import com.kaciula.utils.misc.LogUtils;
 import com.makanstudios.roadalert.BuildConfig;
 import com.makanstudios.roadalert.net.NetService;
+import com.makanstudios.roadalert.utils.Config;
 import com.makanstudios.roadalert.utils.CustomConstants;
 
 /**
@@ -30,7 +31,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     private static final Random sRandom = new Random();
 
     public GCMIntentService() {
-        super(CustomConstants.GCM_SENDER_ID);
+        super(Config.GCM_SENDER_ID);
     }
 
     @Override

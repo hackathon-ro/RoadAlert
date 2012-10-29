@@ -14,8 +14,8 @@ public class AppParams {
     public static boolean hasGcmSupport = true;
 
     public static void init(BasicApplication app) {
-        isForGooglePlay = MiscUtils.isForGooglePlay(CustomConstants.DEVELOPER_SIGNATURE_DEBUG,
-                CustomConstants.DEVELOPER_SIGNATURE_RELEASE);
+        isForGooglePlay = MiscUtils.isForGooglePlay(Config.DEVELOPER_SIGNATURE_DEBUG,
+                Config.DEVELOPER_SIGNATURE_RELEASE);
 
         isKindleFire = MiscUtils.isKindleFire();
 
