@@ -6,9 +6,12 @@ Road Alert is an Android application developed during the Romanian Hackathon eve
 NOTICE
 -----------
 
-It is not currently ready for production. If you fork the repository, you'll have to use your own web service and register with Google Cloud Messaging.
+It is not currently ready for production. If you fork the repository, you'll have to use your own map keys, web service, Google Cloud Messaging settings and developer signatures.
+If you want to do something using the code, please let us know so we can collaborate on it.
 
-###Building the application
+
+Building the application
+-----------
 
 In order to run the project correctly you must add a `LocalConfig.java` file in the `com.makanstudios.roadalert.utils` package containing your own custom settings:
 
@@ -44,14 +47,13 @@ In order to run the project correctly you must add a `LocalConfig.java` file in 
 	    public static final String API_USERNAME = "";
 
 	    public static final String API_PASSWORD = "";
-
-}
+    }
 
 
 Developed By
 ------------
 
-Makan Studios ([WEBSITE][1]) - <contact@makan-studios.com> 
+Makan Studios ([site][1]) - <contact@makan-studios.com> 
 
 
 Credits
@@ -63,7 +65,7 @@ Credits
 License
 -------
 
-	Copyright (C) 2012 Cyril Mottier (http://www.cyrilmottier.com)
+	Copyright (C) 2012 Makan Studios (http://makan-studios.com)
 	
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
