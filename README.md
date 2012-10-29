@@ -49,6 +49,9 @@ In order to run the project correctly you must add a `LocalConfig.java` file in 
 	    public static final String API_PASSWORD = "";
     }
 
+Also you must add a xml file in the res/values folder with your maps api key and a
+keystore for your web service in the res/raw folder.
+
 
 Developed By
 ------------
