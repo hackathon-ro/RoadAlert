@@ -12,3 +12,5 @@ dump.txt
 seeds.txt
 usage.txt
 LocalConfig.java
+local_config.xml
+api_keystore.bks

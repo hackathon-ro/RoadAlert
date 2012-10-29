@@ -44,8 +44,7 @@ public class NetService {
     private static final String URL_API_ALERTS = Config.API_PATH + "/alerts";
 
     private NetService() {
-        // FIXME: keystrore!!
-        service = PlatformSpecificFactory.getWebService(R.raw.keystore_makan_studios,
+        service = PlatformSpecificFactory.getWebService(R.raw.api_keystore,
                 Config.API_KEYSTORE_TYPE, Config.API_KEYSTORE_PASS, 0);
         mapper = new ObjectMapper();
     }
