@@ -15,7 +15,7 @@ import com.kaciula.utils.misc.LogUtils;
 import com.makanstudios.roadalert.BuildConfig;
 import com.makanstudios.roadalert.net.NetService;
 import com.makanstudios.roadalert.utils.Config;
-import com.makanstudios.roadalert.utils.CustomConstants;
+import com.makanstudios.roadalert.utils.Constants;
 
 /**
  * IntentService responsible for handling GCM messages.
@@ -81,7 +81,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     }
 
     private void scheduleSync(Context context, Bundle extras) {
-        int jitterMillis = (int) (sRandom.nextFloat() * CustomConstants.TRIGGER_SYNC_MAX_JITTER_MILLIS);
+        int jitterMillis = (int) (sRandom.nextFloat() * Constants.TRIGGER_SYNC_MAX_JITTER_MILLIS);
         final String debugMessage = "Received message to trigger sync; "
                 + "jitter = " + jitterMillis + "ms";
         LogUtils.d(TAG, debugMessage);

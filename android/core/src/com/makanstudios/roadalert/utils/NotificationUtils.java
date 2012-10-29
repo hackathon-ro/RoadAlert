@@ -52,7 +52,7 @@ public class NotificationUtils {
 
                     LogUtils.d("lat: " + lat + " lon: " + lon + " time: " + timestamp);
                     DateTime now = new DateTime(DateTimeZone.UTC);
-                    if ((now.getMillis() - timestamp) < CustomConstants.NOTIF_TIME) {
+                    if ((now.getMillis() - timestamp) < Constants.NOTIF_TIME) {
                         float distance = LocationData
                                 .distanceBetweenLocations(
                                         ((double) lat) / 1E6,
@@ -63,7 +63,7 @@ public class NotificationUtils {
 
                         if (distance < RoadAlertApplication.currentLocationData
                                 .getNotificationRadius()
-                                && RoadAlertApplication.currentLocationData.avgSpeed >= CustomConstants.NOTIF_MIN_SPEED) {
+                                && RoadAlertApplication.currentLocationData.avgSpeed >= Constants.NOTIF_MIN_SPEED) {
                             LogUtils.d("inside distance frame");
                             popNotif(distance);
                             DatabaseHandler.updateAlertNotified(alertId);

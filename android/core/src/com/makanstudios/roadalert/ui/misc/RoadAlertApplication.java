@@ -19,7 +19,7 @@ import com.makanstudios.roadalert.gcm.GCMRedirectedBroadcastReceiver;
 import com.makanstudios.roadalert.gcm.OnNewGcmNotificationReceiver;
 import com.makanstudios.roadalert.model.LocationData;
 import com.makanstudios.roadalert.utils.AppParams;
-import com.makanstudios.roadalert.utils.CustomConstants;
+import com.makanstudios.roadalert.utils.Constants;
 import com.makanstudios.roadalert.utils.GlobalUtils;
 
 // FIXME: Setup crash reporting either with google docs or bugsense
@@ -41,8 +41,8 @@ public class RoadAlertApplication extends BasicApplication {
 
     private void init() {
         LocationLibrary.showDebugOutput(BuildConfig.DEBUG);
-        LocationLibrary.initialiseLibrary(getBaseContext(), CustomConstants.LOCATION_FREQUENCY,
-                CustomConstants.LOCATION_MAX_AGE, getPackageName());
+        LocationLibrary.initialiseLibrary(getBaseContext(), Constants.LOCATION_FREQUENCY,
+                Constants.LOCATION_MAX_AGE, getPackageName());
         LocationLibrary.forceLocationUpdate(this);
         currentLocationData = new LocationData();
 
